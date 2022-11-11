@@ -159,3 +159,22 @@
 /*============================================================================================*/
 /* Your custom styles below */
 /*============================================================================================*/
+
+/* Padding & Margin */
+ .pb-1{
+	padding-bottom: 5px;
+ }
+
+ .pb-2{
+	margin-bottom: 100px !important;
+	background-color: aqua !important;
+	color: chartreuse !important;
+ }
+
+ .pb-3{
+	padding-bottom: 15px;
+ }
+
+ .pb-4{
+	padding-bottom: 20px;
+ }

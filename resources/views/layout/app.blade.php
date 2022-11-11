@@ -163,6 +163,9 @@
 								<li>
 									<a href="contacts.html">Contact us</a>
 								</li>
+								<li>
+									<a href="#"  data-toggle="modal" data-target="#loginModal">Login</a>
+								</li>
 								<li class="megamenu submenu">
 									<a href="javascript:void(0);" class="show-submenu-mega">More demos</a>
 									<div class="menu-wrapper">
@@ -310,6 +313,45 @@
 		</form>
 	</div>
 	<!-- End Search Menu -->
+
+	@guest
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true" style="padding-top: 10rem">
+		<div class="modal-dialog-centered modal-dialog" style="width: 400px;" role="document">
+		  {{-- <div class="modal-content"  style="width: 400px; background-color: #f9f9f9;"> --}}
+			{{-- <div class="modal-body" style="height: 30px;"> --}}
+					<div class="box_style_2" style="border: 2px none red;
+					padding: 25px;
+					border-radius: 5px;">
+						<div id="message-booking"></div>
+						<form method="post" action="assets/check_avail.php" id="check_avail" autocomplete="off">
+							<div class="form-group">
+								<label>Email</label>
+								<input type="email" class="form-control" id="email" name="email" placeholder="Email">
+							</div>
+							<div class="form-group">
+								<label>Password</label>
+								<input type="password" class="form-control" id="password" name="password" placeholder="Password">
+							</div>
+							<div class="form-group">
+								<input type="submit" value="Login" class="btn_full" id="login">
+							</div>
+
+						</form>
+                        <a href="">Lupa password?</a>
+						<hr>
+                        <p class="pb-2"><strong>Belum memiliki akun?</strong></p>
+						<a href="#0" class="btn_outline"> Daftar</a>
+					{{-- </div> --}}
+			{{-- </div> --}}
+			{{-- <div class="modal-footer">
+			  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			  <button type="button" class="btn btn-primary">Save changes</button>
+			</div> --}}
+		  </div>
+		</div>
+	  </div>
+	@endguest
+	
 
 	<!-- COMMON SCRIPTS -->
 	<script src="{{ asset('main/js/jquery-3.6.0.min.js') }}"></script>

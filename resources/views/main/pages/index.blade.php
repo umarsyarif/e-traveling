@@ -1,4 +1,4 @@
-@extends('main.layout.app')
+@extends('layout.app')
 @section('content')
 	<!-- SubHeader =============================================== -->
 	<section class="header-video">

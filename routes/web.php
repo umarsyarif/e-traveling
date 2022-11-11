@@ -24,6 +24,4 @@ Route::get('/login', function () {
 
 Route::get('/register', function () {
     return view('main/pages/auth/register');
-Route::get('/l', function () {
-    return view('admin.dashboard');
 });

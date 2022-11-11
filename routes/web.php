@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('main/pages/index');
 });
+
+Route::get('/l', function () {
+    return view('admin.dashboard');
+});

@@ -30,12 +30,16 @@ class TravelController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request\StoreTravelRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTravelRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $travel = Travel::create($validated);
+
+        return redirect()->route('travel.index');
     }
 
     /**

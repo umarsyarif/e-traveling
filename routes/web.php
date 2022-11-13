@@ -42,3 +42,13 @@ Route::prefix('travel')->name('travel.')->group(function () {
     Route::get('list', [App\Http\Controllers\TravelController::class, 'list'])->name('list');
     Route::get('details', [App\Http\Controllers\TravelController::class, 'details'])->name('details');
 });
+
+Route::prefix('order')->name('order.')->group(function () {
+    // Admin
+    Route::get('/', [App\Http\Controllers\OrderController::class, 'index'])->name('index');
+});
+
+Route::prefix('user')->name('user.')->group(function () {
+    // Admin
+    Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('index');
+});

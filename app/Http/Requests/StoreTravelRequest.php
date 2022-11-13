@@ -13,7 +13,7 @@ class StoreTravelRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class StoreTravelRequest extends FormRequest
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'hotel_name' => 'string|nullable',
-            'price' => 'required|numeric',
+            'price' => 'required|string',
             'img' => 'nullable',
         ];
     }

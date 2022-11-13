@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTravelRequest;
 use App\Models\Travel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TravelController extends Controller
 {
@@ -16,8 +18,8 @@ class TravelController extends Controller
     {
         $filter = $request->filter;
         $travels = Travel::when($filter == "available", function ($q) use ($filter) {
-                return $q->where('start_date', '>', date('Y-m-d'));
-            })
+            return $q->where('start_date', '>', date('Y-m-d'));
+        })
             ->when($filter == "closed", function ($q) use ($filter) {
                 return $q->where('start_date', '<', date('Y-m-d'));
             })
@@ -39,6 +41,13 @@ class TravelController extends Controller
     public function store(StoreTravelRequest $request)
     {
         $validated = $request->validated();
+
+        //Remove unnecessary string from price
+        $validated['price'] = filter_var(str_replace(',00', '', $validated['price']), FILTER_SANITIZE_NUMBER_INT);
+
+        //Upload travel image
+        $path = $this->uploadTravelImage($request->file('img'));
+        $validated['img'] = $path;
 
         $travel = Travel::create($validated);
 
@@ -84,5 +93,13 @@ class TravelController extends Controller
     public function destroy(Travel $travel)
     {
         //
+    }
+
+    function uploadTravelImage($file)
+    {
+        return Storage::putFile(
+            'images/travel',
+            $file
+        );
     }
 }

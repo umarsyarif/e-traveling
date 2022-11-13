@@ -40,11 +40,6 @@
     @yield('import-css')
     @yield('custom-css')
 
-    <!--[if lt IE 9]>
-      <script src="js/html5shiv.min.js"></script>
-      <script src="js/respond.min.js"></script>
-    <![endif]-->
-
 </head>
 
 <body>
@@ -71,14 +66,6 @@
                             <a href="tel://004542344599" id="phone_top">0045 043204434</a><span id="opening">Mon - Sat
                                 8.00/18.00</span>
                         </div>
-                        <div class="col-md-6 col-sm-6 hidden-xs">
-                            <ul id="top_links">
-                                <li><a href="#0" id="wishlist_link">Wishlist</a>
-                                </li>
-                                <li><a href="#0">PURCHASE THIS TEMPLATE</a>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                     <!-- End row -->
                 </div>
@@ -90,8 +77,7 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-3 col-xs-3">
                         <div id="logo_home">
-                            <h1><a href="index.html" title="City tours travel template">BesTours Travel&amp;Excursion
-                                    Multipurpose Template</a></h1>
+                            <h1><a href="{{ route('home') }}" title="City tours travel template">BesTours Travel&amp;Tour</a></h1>
                         </div>
                     </div>
                     <nav class="col-md-9 col-sm-9 col-xs-9">
@@ -137,46 +123,11 @@
                                 <li>
                                     <a href="about.html">About us</a>
                                 </li>
-                                <li><a href="faq.html">Faq</a>
-                                </li>
-                                <li class="submenu">
-                                    <a href="javascript:void(0);" class="show-submenu">Other pages</a>
-                                    <ul>
-                                        <li><a href="index_3.html">Header Version 2</a>
-                                        </li>
-                                        <li><a href="blog.html">Blog</a>
-                                        </li>
-                                        <li><a href="blog_post.html">Blog post</a>
-                                        </li>
-                                        <li><a href="gallery.html">Gallery</a>
-                                        </li>
-                                        <li><a href="maintenance.html">Mantainance</a>
-                                        </li>
-                                        <li><a href="profile.html">Team Profile</a>
-                                        </li>
-                                        <li><a href="contacts_2.html">Contact 2</a>
-                                        </li>
-                                        <li><a href="coming_soon/index.html">Coming soon</a>
-                                        </li>
-                                        <li><a href="shortcodes.html">Shortcodes</a>
-                                        </li>
-                                        <li><a href="icon_pack_1.html">Icon pack 1</a>
-                                        </li>
-                                        <li><a href="icon_pack_2.html">Icon pack 2</a>
-                                        </li>
-                                        <li><a href="icon_pack_3.html">Icon pack 3</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="contacts.html">Contact us</a>
-                                </li>
-                                @guest
-                                    <li>
-                                        <a href="#" class="login-button">Login</a>
-                                    </li>
-                                @endguest
                                 @auth
+                                    @if (Auth::user()->role == 'admin' || Auth::user()->role == 'pegawai')
+                                        <li><a href="{{ route('dashboard') }}">Dashboard</a>
+                                        </li>
+                                    @endif
                                     <li>
                                         <form action="{{ route('logout') }}" method="post">
                                             @csrf
@@ -184,59 +135,11 @@
                                         </form>
                                     </li>
                                 @endauth
-                                <li class="megamenu submenu">
-                                    <a href="javascript:void(0);" class="show-submenu-mega">More demos</a>
-                                    <div class="menu-wrapper">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <h3>Museum Tours</h3>
-                                                <div class="menu-item">
-                                                    <a href="#"><img
-                                                            src="{{ asset('main/img/menu-demo-1.jpg') }}"
-                                                            width="400" height="226" alt=""
-                                                            class="img-responsive">
-                                                    </a>
-                                                    <p>
-                                                        Lorem ipsum dolor sit amet, et cum civibus referrentur, at
-                                                        propriae forensibus qui. Duo aliquip necessitatibus ne.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <h3>Adventure Tours</h3>
-                                                <div class="menu-item">
-                                                    <a href="#"><img
-                                                            src="{{ asset('main/img/menu-demo-2.jpg') }}"
-                                                            width="400" height="226" alt=""
-                                                            class="img-responsive">
-                                                    </a>
-                                                    <p>
-                                                        Lorem ipsum dolor sit amet, et cum civibus referrentur, at
-                                                        propriae forensibus qui. Duo aliquip necessitatibus ne.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <h3>Travel Tours</h3>
-                                                <div class="menu-item">
-                                                    <a href="#"><img
-                                                            src="{{ asset('main/img/menu-demo-3.jpg') }}"
-                                                            width="400" height="226" alt=""
-                                                            class="img-responsive">
-                                                    </a>
-                                                    <p>
-                                                        Lorem ipsum dolor sit amet, et cum civibus referrentur, at
-                                                        propriae forensibus qui. Duo aliquip necessitatibus ne.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr class="hidden-xs">
-                                        <p class="text-center hidden-xs">
-                                            <a href="#" class="btn_outline">MORE DEMOS SOON</a>
-                                    </div>
-                                    <!-- End menu-wrapper -->
-                                </li>
+                                @guest
+                                    <li>
+                                        <a href="javascript:void(0)" class="login-button">Login</a>
+                                    </li>
+                                @endguest
                             </ul>
                         </div>
                         <!-- End main-menu -->
@@ -370,8 +273,7 @@
                         <input type="hidden" name="type" value="login">
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                placeholder="Email" required>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
                         </div>
                         <div class="form-group">
                             <label>Password</label>
@@ -379,7 +281,9 @@
                                 placeholder="Password" required>
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="Login" class="btn_full" id="login">
+                            <button type="submit" class="btn_full" id="login">
+                                Login
+                            </button>
                         </div>
 
                     </form>

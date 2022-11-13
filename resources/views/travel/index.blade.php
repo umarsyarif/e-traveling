@@ -79,7 +79,8 @@ $title = 'Wisata';
                                                     <td>{{ "{$row->fullfiled_quota}/{$row->quota}" }}</td>
                                                     {{-- <td>{!! Str::limit($row->description, 60, ' ...') !!}</td> --}}
                                                     <td>
-                                                        <span class="badge bg-success">{{ $row->status }}</span>
+                                                        <span
+                                                            class="badge bg-{{ $row->status == 'Full' ? 'warning' : ($row->status == 'Available' ? 'success' : 'inverse') }}">{{ $row->status }}</span>
                                                     </td>
                                                     <td>
                                                         <a href="{{ route('travel.show', $row->id) }}"

@@ -53,7 +53,14 @@ class TravelController extends Controller
      */
     public function show(Travel $travel)
     {
-        //
+        $orders = $travel->orders()->get();
+
+        $data = [
+            'travel' => $travel,
+            'orders' => $orders
+        ];
+
+        return view('travel.show', $data);
     }
 
     /**

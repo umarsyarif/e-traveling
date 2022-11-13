@@ -14,22 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Main Page View
-Route::get('/', function () {
-    return view('main/pages/index');
-});
-
-Route::get('/login', function () {
-    return view('main/pages/auth/login');
-});
-
-Route::get('/register', function () {
-    return view('main/pages/auth/register');
-});
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
 
 Route::prefix('travel')->name('travel.')->group(function () {
     // Admin

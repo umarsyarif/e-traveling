@@ -14,19 +14,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Main Page View
-Route::get('/', function () {
-    return view('main/pages/index');
-});
-
-Route::get('/login', function () {
-    return view('main/pages/auth/login');
-});
-
-Route::get('/register', function () {
-    return view('main/pages/auth/register');
-});
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
+
+Route::prefix('travel')->name('travel.')->group(function () {
+    // Admin
+    Route::get('/', [App\Http\Controllers\TravelController::class, 'index'])->name('index');
+    Route::get('/{travel}', [App\Http\Controllers\TravelController::class, 'show'])->name('show');
+    Route::put('/{travel}', [App\Http\Controllers\TravelController::class, 'update'])->name('update');
+    Route::post('/', [App\Http\Controllers\TravelController::class, 'store'])->name('store');
+
+    // Customer
+    Route::get('list', [App\Http\Controllers\TravelController::class, 'list'])->name('list');
+    Route::get('details', [App\Http\Controllers\TravelController::class, 'details'])->name('details');
+});
+
+Route::prefix('order')->name('order.')->group(function () {
+    // Admin
+    Route::get('/', [App\Http\Controllers\OrderController::class, 'index'])->name('index');
+});
+
+Route::prefix('user')->name('user.')->group(function () {
+    // Admin
+    Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('index');
+});

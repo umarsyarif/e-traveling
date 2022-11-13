@@ -171,9 +171,19 @@
                                 <li>
                                     <a href="contacts.html">Contact us</a>
                                 </li>
-                                <li>
-                                    <a href="#" class="login-button">Login</a>
-                                </li>
+                                @guest
+                                    <li>
+                                        <a href="#" class="login-button">Login</a>
+                                    </li>
+                                @endguest
+                                @auth
+                                    <li>
+                                        <form action="{{ route('logout') }}" method="post">
+                                            @csrf
+                                            <button type="submit" class="logout-button">Logout</button>
+                                        </form>
+                                    </li>
+                                @endauth
                                 <li class="megamenu submenu">
                                     <a href="javascript:void(0);" class="show-submenu-mega">More demos</a>
                                     <div class="menu-wrapper">
@@ -346,17 +356,27 @@
                 <div class="box_style_2" style="border: 2px none red;
 					padding: 25px;
 					border-radius: 5px;">
-                    <div id="message-booking"></div>
-                    <form method="post" id="check_avail" autocomplete="off">
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            @foreach ($errors->all() as $error)
+                                <p>{{ $error }}</p>
+                            @endforeach
+                        </div>
+                    @endif
+                    <form method="POST" action="{{ route('login') }}" autocomplete="off">
+                        @csrf
+                        <input type="hidden" name="type" value="login">
                         <div class="form-group">
                             <label>Email</label>
                             <input type="email" class="form-control" id="email" name="email"
-                                placeholder="Email">
+                                placeholder="Email" required>
                         </div>
                         <div class="form-group">
                             <label>Password</label>
                             <input type="password" class="form-control" id="password" name="password"
-                                placeholder="Password">
+                                placeholder="Password" required>
                         </div>
                         <div class="form-group">
                             <input type="submit" value="Login" class="btn_full" id="login">
@@ -380,7 +400,6 @@
                 <div class="box_style_2" style="border: 2px none red;
 					padding: 25px;
 					border-radius: 5px;">
-                    <div id="message-booking"></div>
                     <form method="post" id="check_avail" autocomplete="off">
                         <div class="form-group">
                             <label>Email</label>
@@ -393,7 +412,7 @@
                                 placeholder="Password">
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="Login" class="btn_full" id="login">
+                            <button type="submit" class="btn_full" id="login">Login</button>
                         </div>
 
                     </form>
@@ -440,31 +459,58 @@
     <script src="{{ asset('main/assets/validate.js') }}"></script>
     <script src="{{ asset('main/js/jquery.tweet.min.js') }}"></script>
     <script src="{{ asset('main/js/functions.js') }}"></script>
-    @yield('import-js')
+    <script src="{{ asset('main/js/custom.js') }}"></script>
 
+    @yield('import-js')
     @yield('custom-js')
-    <script>
-        $(".register-button").click(function() {
-            $('#loginModal').modal('hide');
-            $('#registerModal').modal('show');
-            $('#forgotPasswordModal').modal('hide');
-        });
-        $(".login-button").click(function() {
-            let isShown = ($("#loginModal").data('bs.modal') || {}).isShown;
-            if (isShown) {
+
+    @guest
+
+        <script>
+            $(".login-button").click(function() {
+                let isShown = ($("#loginModal").data('bs.modal') || {}).isShown;
+                if (isShown) {
+                    $('#loginModal').modal('hide');
+                } else {
+                    $('#loginModal').modal('show');
+                    $('#registerModal').modal('hide');
+                    $('#forgotPasswordModal').modal('hide');
+                }
+            });
+
+            $(".register-button").click(function() {
                 $('#loginModal').modal('hide');
-            } else {
-                $('#loginModal').modal('show');
-                $('#registerModal').modal('hide');
+                $('#registerModal').modal('show');
                 $('#forgotPasswordModal').modal('hide');
-            }
-        });
-        $(".forgot-password-button").click(function() {
-            $('#loginModal').modal('hide');
-            $('#registerModal').modal('hide');
-            $('#forgotPasswordModal').modal('show');
-        });
-    </script>
+            });
+
+            $(".forgot-password-button").click(function() {
+                $('#loginModal').modal('hide');
+                $('#registerModal').modal('hide');
+                $('#forgotPasswordModal').modal('show');
+            });
+
+            @if ($errors->any())
+                let type = '{{ old('type') }}';
+
+                if (type == 'login') {
+                    $(function() {
+                        $('#loginModal').modal('show');
+                    });
+                }
+                if (type == 'register') {
+                    $(function() {
+                        $('#registerModal').modal('show');
+                    });
+                }
+                if (type == 'forgot-password') {
+                    $(function() {
+                        $('#forgotPasswordModal').modal('show');
+                    });
+                }
+            @endif
+        </script>
+    @endguest
 
 </body>
 

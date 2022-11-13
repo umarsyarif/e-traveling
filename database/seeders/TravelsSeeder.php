@@ -20,7 +20,6 @@ class TravelsSeeder extends Seeder
             'quota' => 10,
             'start_date' => date('Y-m-d', strtotime(today() . '+ 2 days')),
             'end_date' => date('Y-m-d', strtotime(today() . '+ 7 days')),
-            'hotel_name' => 'Grand Zuri',
             'price' => '5000000',
             'img' => '',
         ]);

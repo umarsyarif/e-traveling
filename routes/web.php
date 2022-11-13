@@ -30,3 +30,15 @@ Route::get('/register', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::prefix('travel')->name('travel.')->group(function () {
+    // Admin
+    Route::get('/', [App\Http\Controllers\TravelController::class, 'index'])->name('index');
+    Route::get('/{travel}', [App\Http\Controllers\TravelController::class, 'show'])->name('show');
+    Route::put('/{travel}', [App\Http\Controllers\TravelController::class, 'update'])->name('update');
+    Route::post('/', [App\Http\Controllers\TravelController::class, 'store'])->name('store');
+
+    // Customer
+    Route::get('list', [App\Http\Controllers\TravelController::class, 'list'])->name('list');
+    Route::get('details', [App\Http\Controllers\TravelController::class, 'details'])->name('details');
+});

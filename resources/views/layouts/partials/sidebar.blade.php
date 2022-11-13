@@ -10,7 +10,7 @@
             </li>
             {{-- Karyawan --}}
             <li class="">
-                <a href="navbar-light.htm">
+                <a href="{{ route('travel.index') }}">
                     <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
                     <span class="pcoded-mtext">Wisata</span>
                 </a>

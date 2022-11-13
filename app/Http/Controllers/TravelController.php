@@ -12,19 +12,22 @@ class TravelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-    }
+        $filter = $request->filter;
+        $travels = Travel::when($filter == "available", function ($q) use ($filter) {
+                return $q->where('start_date', '>', date('Y-m-d'));
+            })
+            ->when($filter == "closed", function ($q) use ($filter) {
+                return $q->where('start_date', '<', date('Y-m-d'));
+            })
+            ->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $data = [
+            'travels' => $travels
+        ];
+
+        return view('travel.index', $data);
     }
 
     /**
@@ -49,17 +52,6 @@ class TravelController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Travel $travel)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Travel  $travel
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Travel $travel)
     {
         //
     }

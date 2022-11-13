@@ -22,7 +22,7 @@ class CreateTravelsTable extends Migration
             $table->date('end_date');
             $table->string('hotel_name')->nullable();
             $table->string('price');
-            $table->string('img');
+            $table->string('img')->nullable();
             $table->timestamps();
         });
     }

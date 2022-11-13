@@ -20,7 +20,6 @@ class CreateTravelsTable extends Migration
             $table->integer('quota');
             $table->date('start_date');
             $table->date('end_date');
-            $table->string('hotel_name')->nullable();
             $table->string('price');
             $table->string('img')->nullable();
             $table->timestamps();

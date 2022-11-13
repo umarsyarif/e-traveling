@@ -9,13 +9,16 @@
                 </a>
             </li>
             {{-- Karyawan --}}
-            <li class="{{ Request::is('travel') ? "active" : ""}}">
-                <a href="{{ route('travel.index') }}">
-                    <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
-                    <span class="pcoded-mtext">Wisata</span>
-                </a>
-            </li>
+            {{-- @if (Auth::user()->role == 'pegawai') --}}
+                <li class="{{ Request::is('travel') ? "active" : ""}}">
+                    <a href="{{ route('travel.index') }}">
+                        <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
+                        <span class="pcoded-mtext">Wisata</span>
+                    </a>
+                </li>
+            {{-- @endif --}}
             {{-- Admin --}}
+            {{-- @if (Auth::user()->role == 'admin') --}}
             <li class="{{ Request::is('order') ? "active" : ""}}">
                 <a href="{{ route('order.index') }}">
                     <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
@@ -28,6 +31,7 @@
                     <span class="pcoded-mtext">Karyawan</span>
                 </a>
             </li>
+            {{-- @endif --}}
         </ul>
     </div>
 </nav>

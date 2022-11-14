@@ -42,9 +42,6 @@ class TravelController extends Controller
     {
         $validated = $request->validated();
 
-        //Remove unnecessary string from price
-        $validated['price'] = filter_var(str_replace(',00', '', $validated['price']), FILTER_SANITIZE_NUMBER_INT);
-
         //Upload travel image
         $path = $this->uploadTravelImage($request->file('img'));
         $validated['img'] = $path;

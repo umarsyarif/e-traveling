@@ -31,6 +31,7 @@ class Travel extends Model
         'is_available',
         'is_quota_not_fulfilled',
         'fulfilled_quota',
+        'price_str',
         'status'
     ];
 
@@ -60,6 +61,22 @@ class Travel extends Model
         }
 
         return $status;
+    }
+
+    public function getPriceStrAttribute()
+    {
+        return "Rp. ". number_format((int)$this->attributes['price'], 2, ',', '.');
+    }
+
+    public function getDurationAttribute()
+    {
+        return $this->attributes['end_date']->diff($this->attributes['start_date']);
+    }
+
+    // Setters
+    public function setPriceAttribute($value)
+    {
+        $this->attributes['price'] = filter_var(str_replace(',00', '', $value), FILTER_SANITIZE_NUMBER_INT);;
     }
 
     // Relations

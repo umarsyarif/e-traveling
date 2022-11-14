@@ -75,7 +75,7 @@ $title = 'Wisata';
                                                     <td>{{ $row->name }}</td>
                                                     <td>{{ "{$row->start_date->format('d F Y')} - {$row->end_date->format('d F Y')}" }}
                                                     </td>
-                                                    <td>{{ $row->price }}</td>
+                                                    <td>{{ $row->duration }}</td>
                                                     <td>{{ "{$row->fullfiled_quota}/{$row->quota}" }}</td>
                                                     {{-- <td>{!! Str::limit($row->description, 60, ' ...') !!}</td> --}}
                                                     <td>

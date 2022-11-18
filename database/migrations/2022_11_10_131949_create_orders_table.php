@@ -19,6 +19,8 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id');
             $table->boolean('is_accepted')->default(false);
             $table->text('testimoni')->nullable();
+            $table->timestamp('accepted_at')->nullable();
+            $table->integer('accepted_by')->nullable();
             $table->timestamps();
         });
     }

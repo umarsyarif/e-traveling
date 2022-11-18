@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -70,7 +71,9 @@ class Travel extends Model
 
     public function getDurationAttribute()
     {
-        return $this->attributes['end_date']->diff($this->attributes['start_date']);
+        $start_date = new DateTime($this->attributes['start_date']);
+        $end_date = new DateTime($this->attributes['end_date']);
+        return $end_date->diff($start_date)->format('%a');
     }
 
     // Setters

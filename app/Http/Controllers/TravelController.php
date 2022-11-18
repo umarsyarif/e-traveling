@@ -59,12 +59,13 @@ class TravelController extends Controller
      */
     public function show(Travel $travel)
     {
-        $orders = $travel->orders()->get();
+        $orders = $travel->orders()->with(['user', 'travel'])->get();
 
         $data = [
             'travel' => $travel,
             'orders' => $orders
         ];
+        // dd($data);
 
         return view('travel.show', $data);
     }

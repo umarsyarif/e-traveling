@@ -34,6 +34,7 @@ Route::prefix('travel')->name('travel.')->group(function () {
 Route::prefix('order')->name('order.')->group(function () {
     // Admin
     Route::get('/', [App\Http\Controllers\OrderController::class, 'index'])->name('index');
+    Route::put('/{order}', [App\Http\Controllers\OrderController::class, 'update'])->name('update');
 });
 
 Route::prefix('user')->name('user.')->group(function () {

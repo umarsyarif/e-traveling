@@ -50,8 +50,8 @@ $title = 'Wisata';
                                         class="btn btn-inverse {{ Request::get('filter') != 'closed' ? 'btn-outline-inverse' : '' }} btn-sm waves-effect waves-light">Closed</a>
                                 </div>
                                 <div class="card-header-right">
-                                    <button type="button" class="btn btn-primary btn-sm waves-effect waves-light mr-2"
-                                        data-toggle="modal" data-target="#modal-create">+ Wisata</button>
+                                    <button type="button" class="btn btn-primary btn-sm waves-effect waves-light btn-create mr-2"
+                                        data-toggle="modal" data-target="#modal-wisata">+ Wisata</button>
                                 </div>
                             </div>
                             <div class="card-block">
@@ -75,7 +75,7 @@ $title = 'Wisata';
                                                     <td>{{ $row->name }}</td>
                                                     <td>{{ "{$row->start_date->format('d F Y')} - {$row->end_date->format('d F Y')}" }}
                                                     </td>
-                                                    <td>{{ $row->duration }}</td>
+                                                    <td>{{ $row->price_str }}</td>
                                                     <td>{{ "{$row->fullfiled_quota}/{$row->quota}" }}</td>
                                                     {{-- <td>{!! Str::limit($row->description, 60, ' ...') !!}</td> --}}
                                                     <td>
@@ -89,6 +89,9 @@ $title = 'Wisata';
                                                             data-original-title="Check Orders">
                                                             <i class="feather icon-info mx-auto"></i>
                                                         </a>
+                                                        {{-- <button class="btn btn-sm btn-warning btn-edit px-2" data-id="{{ $row->id }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">
+                                                            <i class="feather icon-unlock mx-auto"></i>
+                                                        </button> --}}
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -114,11 +117,11 @@ $title = 'Wisata';
         </div>
     </div>
 
-    {{-- Modal Create --}}
-    <div class="modal fade" id="modal-create" tabindex="-1" role="dialog" style="z-index: 1050; display: none;"
+    {{-- Modal Wisata --}}
+    <div class="modal fade" id="modal-wisata" tabindex="-1" role="dialog" style="z-index: 1050; display: none;"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form action="{{ route('travel.store') }}" method="post" enctype="multipart/form-data">
+            <form id="" action="{{ route('travel.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
@@ -208,21 +211,6 @@ $title = 'Wisata';
 
         $(document).ready(function() {
             $('#simpletable').DataTable();
-        });
-
-        // on change passwd
-        $('.btn-change-pw').click(function() {
-            $('#modal-change-password').modal('show');
-            const id = $(this).data('id');
-            $('#form-change-password').attr('action', `${url}/${id}`);
-        });
-        $('#form-change-password').submit(function(event) {
-            const password = $('#password1').val();
-            const password2 = $('#password2').val();
-            if (password != password2) {
-                event.preventDefault();
-                notify('fas fa-check', 'danger', 'Konfirmasi Password harus sama!');
-            }
         });
 
         // show modal if any errors

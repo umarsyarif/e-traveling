@@ -39,5 +39,5 @@ Route::prefix('order')->name('order.')->group(function () {
 
 Route::prefix('user')->name('user.')->group(function () {
     // Admin
-    Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('index');
+    // Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('index');
 });

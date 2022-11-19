@@ -77,7 +77,8 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-3 col-xs-3">
                         <div id="logo_home">
-                            <h1><a href="{{ route('home') }}" title="City tours travel template">BesTours Travel&amp;Tour</a></h1>
+                            <h1><a href="{{ route('home') }}" title="City tours travel template">BesTours
+                                    Travel&amp;Tour</a></h1>
                         </div>
                     </div>
                     <nav class="col-md-9 col-sm-9 col-xs-9">
@@ -256,9 +257,7 @@
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
             aria-hidden="true" style="padding-top: 10rem">
             <div class="modal-dialog-centered modal-dialog" style="width: 400px;" role="document">
-                <div class="box_style_2" style="border: 2px none red;
-					padding: 25px;
-					border-radius: 5px;">
+                <div class="box_style_2 pb-5">
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
@@ -273,7 +272,8 @@
                         <input type="hidden" name="type" value="login">
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
+                            <input type="email" class="form-control" id="email" name="email"
+                                placeholder="Email" value="{{ old('email') }}" required>
                         </div>
                         <div class="form-group">
                             <label>Password</label>
@@ -287,11 +287,10 @@
                         </div>
 
                     </form>
-                    <a class="forgot-password-button">Lupa password?</a>
+                    <a class="forgot-password-button" style="cursor: pointer;">Lupa password?</a>
                     <hr>
-                    <p class="pb-2"><strong>Belum memiliki akun?</strong></p>
-                    <button class="btn_outline register-button"> Daftar</button>
-
+                    <p><strong>Belum memiliki akun?</strong></p>
+                    <button class="btn_outline register-button"> DAFTAR</button>
                 </div>
             </div>
         </div>
@@ -299,12 +298,33 @@
 
         {{-- Register Modal --}}
         <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel"
-            aria-hidden="true" style="padding-top: 10rem">
-            <div class="modal-dialog-centered modal-dialog" style="width: 400px;" role="document">
-                <div class="box_style_2" style="border: 2px none red;
-					padding: 25px;
-					border-radius: 5px;">
-                    <form method="post" id="check_avail" autocomplete="off">
+            aria-hidden="true" style="padding-top: 10rem; height: 600px;">
+            <div class="modal-dialog-centered modal-dialog custom-scrollbar"
+                style="width: 400px; height :100% !important;
+            overflow-y:auto !important;" role="document">
+                <div class="box_style_2 pb-5">
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            @foreach ($errors->all() as $error)
+                                <p>{{ $error }}</p>
+                            @endforeach
+                        </div>
+                    @endif
+                    <form method="POST" action="{{ route('register') }}" autocomplete="off">
+                        @csrf
+                        <input type="hidden" name="type" value="register">
+                        <div class="form-group">
+                            <label>Nama</label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                placeholder="Nama">
+                        </div>
+                        <div class="form-group">
+                            <label>Telepon</label>
+                            <input type="text" class="form-control" id="phone_number" name="phone_number"
+                                placeholder="Telepon">
+                        </div>
                         <div class="form-group">
                             <label>Email</label>
                             <input type="email" class="form-control" id="email" name="email"
@@ -316,13 +336,18 @@
                                 placeholder="Password">
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn_full" id="login">Login</button>
+                            <label>Konfirmasi Password</label>
+                            <input type="password" class="form-control" id="password_confirmation"
+                                name="password_confirmation" placeholder="Konfirmasi Password">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn_full" id="login">Daftar</button>
                         </div>
 
                     </form>
                     <hr>
                     <p class="pb-2"><strong>Sudah memiliki akun?</strong></p>
-                    <button class="btn_outline login-button"> Login</button>
+                    <button class="btn_outline login-button"> LOGIN</button>
 
                 </div>
             </div>
@@ -332,23 +357,27 @@
         <div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog"
             aria-labelledby="forgotPasswordModalLabel" aria-hidden="true" style="padding-top: 10rem">
             <div class="modal-dialog-centered modal-dialog" style="width: 400px;" role="document">
-                <div class="box_style_2" style="border: 2px none red;
-					   padding: 25px;
-					   border-radius: 5px;">
-                    <div id="message-booking"></div>
-                    <form method="post" id="check_avail" autocomplete="off">
+                <div class="box_style_2 pb-5">
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            @foreach ($errors->all() as $error)
+                                <p>{{ $error }}</p>
+                            @endforeach
+                        </div>
+                    @endif
+                    <form method="post" autocomplete="off">
                         <div class="form-group">
                             <label>Email</label>
                             <input type="email" class="form-control" id="email" name="email"
                                 placeholder="Email">
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="Login" class="btn_full" id="login">
+                            <button type="submit" class="btn_full" id="login">Reset Password</button>
                         </div>
 
                     </form>
-                    <hr>
-                    <button class="btn_outline login-button"> Login</button>
 
                 </div>
             </div>

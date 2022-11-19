@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTravelRequest;
+use App\Http\Requests\UpdateTravelRequest;
 use App\Models\Travel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -43,8 +44,7 @@ class TravelController extends Controller
         $validated = $request->validated();
 
         //Upload travel image
-        $path = $this->uploadTravelImage($request->file('img'));
-        $validated['img'] = $path;
+        $validated['img'] = $this->uploadTravelImage($request->file('img'));
 
         $travel = Travel::create($validated);
 
@@ -65,7 +65,6 @@ class TravelController extends Controller
             'travel' => $travel,
             'orders' => $orders
         ];
-        // dd($data);
 
         return view('travel.show', $data);
     }
@@ -77,9 +76,19 @@ class TravelController extends Controller
      * @param  \App\Models\Travel  $travel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Travel $travel)
+    public function update(UpdateTravelRequest $request, Travel $travel)
     {
-        //
+        $validated = $request->validated();
+
+        //Upload travel image
+        if(isset($validated['img'])){
+            $validated['img'] = $this->uploadTravelImage($request->file('img'));
+        }
+
+        $travel->update($validated);
+
+
+        return redirect()->back()->with('success', 'Berhasil!');
     }
 
     /**
@@ -95,9 +104,10 @@ class TravelController extends Controller
 
     function uploadTravelImage($file)
     {
-        return Storage::putFile(
+        $path = Storage::putFile(
             'images/travel',
             $file
         );
+        return "storage/{$path}";
     }
 }

@@ -53,51 +53,91 @@ $title = $travel->name;
                                     </ul>
                                 </div>
                             </div>
-                            <div class="card-block">
-                                <div class="form-group form-primary">
-                                    <label for="name">Nama Wisata</label>
-                                    <input type="text" id="name" name="name"
-                                        class="form-control @error('name') is-invalid @enderror" value="{{ $travel->name }}"
-                                        required>
+                            <div class="card-block" id="edit-card">
+                                <div class="cover-profile">
+                                    <img class="profile-bg-img img-fluid" src="{{ asset($travel->img) }}" alt="bg-img">
                                 </div>
-                                <div class="form-group form-primary row">
-                                    <div class="col-sm-6">
-                                        <label for="name">Tanggal Mulai</label>
-                                        <input type="date" id="start_date" name="start_date"
-                                            class="form-control @error('start_date') is-invalid @enderror"
-                                            value="{{ $travel->start_date }}" required>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="name">Tanggal Selesai</label>
-                                        <input type="date" id="end_date" name="end_date"
-                                            class="form-control @error('end_date') is-invalid @enderror"
-                                            value="{{ $travel->end_date }}" required>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <th scope="row">Nama</th>
+                                            <td>: {{ $travel->name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Tanggal</th>
+                                            <td>: {{ "{$travel->start_date->format('d F Y')} - {$travel->end_date->format('d F Y')}" }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Harga</th>
+                                            <td>: {{ $travel->price_str }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Kuota</th>
+                                            <td>: {{ "{$travel->fullfiled_quota}/{$travel->quota}" }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="p-1">
+                                        <h4 class="sub-title text-capitalize">Deskripsi</h4>
+                                        <span class="mt-2">
+                                            {!! $travel->description !!}
+                                        </span>
                                     </div>
                                 </div>
-                                <div class="form-group form-primary row">
-                                    <div class="col-sm-6">
-                                        <label for="name">Harga</label>
-                                        <input type="text" data-a-sign="Rp. " id="price" name="price"
-                                            class="form-control autonumber @error('price') is-invalid @enderror"
-                                            value="{{ $travel->price }}" required>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="name">Kuota</label>
-                                        <input type="number" min="1" id="quota" name="quota"
-                                            class="form-control @error('quota') is-invalid @enderror" value="{{ $travel->quota }}"
+                                <button id="btn-edit-travel" class="btn btn-warning btn-sm waves-effect waves-light float-right mt-2">Edit</button>
+                            </div>
+                            <div class="card-block d-none" id="show-card">
+                                <form action="{{ route('travel.update', ['travel' => $travel->id]) }}" method="post" enctype="multipart/form-data">
+                                    @method('PUT')
+                                    @csrf
+                                    <div class="form-group form-primary">
+                                        <label for="name">Nama Wisata</label>
+                                        <input type="text" id="name" name="name"
+                                            class="form-control @error('name') is-invalid @enderror" value="{{ $travel->name }}"
                                             required>
                                     </div>
-                                </div>
-                                <div class="form-group form-primary">
-                                    <label for="name">Gambar</label>
-                                    <input type="file" id="img" name="img"
-                                        class="form-control @error('img') is-invalid @enderror" value="{{ $travel->img }}">
-                                </div>
-                                <div class="form-group form-primary">
-                                    <label for="name">Deskripsi</label>
-                                    <textarea id="description" name="description"
-                                        class="form-control @error('description') is-invalid @enderror" required>{{ $travel->description }}</textarea>
-                                </div>
+                                    <div class="form-group form-primary row">
+                                        <div class="col-sm-6">
+                                            <label for="name">Tanggal Mulai</label>
+                                            <input type="date" id="start_date" name="start_date"
+                                                class="form-control @error('start_date') is-invalid @enderror"
+                                                value="{{ $travel->start_date->format('Y-m-d') }}" required>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="name">Tanggal Selesai</label>
+                                            <input type="date" id="end_date" name="end_date"
+                                                class="form-control @error('end_date') is-invalid @enderror"
+                                                value="{{ $travel->end_date->format('Y-m-d') }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-primary row">
+                                        <div class="col-sm-6">
+                                            <label for="name">Harga</label>
+                                            <input type="text" data-a-sign="Rp. " id="price" name="price"
+                                                class="form-control autonumber @error('price') is-invalid @enderror"
+                                                value="{{ $travel->price }}" required>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="name">Kuota</label>
+                                            <input type="number" min="1" id="quota" name="quota"
+                                                class="form-control @error('quota') is-invalid @enderror" value="{{ $travel->quota }}"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-primary">
+                                        <label for="name">Gambar</label>
+                                        <input type="file" id="img" name="img"
+                                            class="form-control @error('img') is-invalid @enderror" value="{{ $travel->img }}">
+                                        <small>Upload gambar jika ingin mengubah gambar</small>
+                                    </div>
+                                    <div class="form-group form-primary">
+                                        <label for="name">Deskripsi</label>
+                                        <textarea id="description" name="description" rows="10"
+                                            class="form-control @error('description') is-invalid @enderror" required>{{ $travel->description }}</textarea>
+                                    </div>
+                                    <a href="{{ route('travel.show', ['travel' => $travel->id]) }}" class="btn btn-danger btn-sm waves-effect waves-light mt-2">Cancel</a>
+                                    <button type="submit" class="btn btn-success btn-sm waves-effect waves-light float-right mt-2">Save</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -142,10 +182,7 @@ $title = $travel->name;
                                                             data-placement="top"
                                                             data-original-title="Accept Order">
                                                             <i class="feather icon-info mx-auto"></i>
-                                                    </button>
-                                                        {{-- <button class="btn btn-sm btn-warning btn-edit px-2" data-id="{{ $row->id }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">
-                                                            <i class="feather icon-unlock mx-auto"></i>
-                                                        </button> --}}
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -204,6 +241,8 @@ $title = $travel->name;
     <!-- form-mask js -->
     <script src="{{ asset('adminty/assets/pages/form-masking/autoNumeric.js') }}"></script>
     <script src="{{ asset('adminty/assets/pages/form-masking/form-mask.js') }}"></script>
+    <!-- Moment js -->
+    <script type="text/javascript" src="{{ asset('adminty/assets/pages/advance-elements/moment-with-locales.min.js') }}"></script>
     <script>
         const urlTravel = '{{ route('travel.index') }}';
         const urlOrder = '{{ route('order.index') }}';
@@ -211,6 +250,12 @@ $title = $travel->name;
 
         $(document).ready(function() {
             $('#simpletable').DataTable();
+        });
+
+        $('#btn-edit-travel').click(function () {
+            $('#show-card').toggleClass('d-none');
+            $('#edit-card').toggleClass('d-none');
+            // $('#start_date').val(moment('{{$travel->start_date}}').format("YYYY-MM-DD"));
         });
 
         $('.btn-update-order').click(function () {

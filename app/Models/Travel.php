@@ -76,6 +76,11 @@ class Travel extends Model
         return $end_date->diff($start_date)->format('%a');
     }
 
+    public function getImgAttribute($value)
+    {
+        return $value ?? '/main/img/tour_list_1.jpg';
+    }
+
     // Setters
     public function setPriceAttribute($value)
     {

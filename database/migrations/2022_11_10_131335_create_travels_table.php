@@ -23,6 +23,7 @@ class CreateTravelsTable extends Migration
             $table->string('price');
             $table->string('img')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

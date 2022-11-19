@@ -5,10 +5,12 @@ namespace App\Models;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Travel extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $table = 'travels';
     protected $guarded = ['id'];
@@ -35,6 +37,18 @@ class Travel extends Model
         'price_str',
         'status'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Override on delete
+        self::deleting(function (Travel $model) {
+            $model->orders()->each(function ($row) {
+                $row->delete();
+            });
+        });
+    }
 
     // Getters
     public function getIsAvailableAttribute()

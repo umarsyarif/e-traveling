@@ -89,9 +89,9 @@ $title = 'Wisata';
                                                             data-original-title="Check Orders">
                                                             <i class="feather icon-info mx-auto"></i>
                                                         </a>
-                                                        {{-- <button class="btn btn-sm btn-warning btn-edit px-2" data-id="{{ $row->id }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">
-                                                            <i class="feather icon-unlock mx-auto"></i>
-                                                        </button> --}}
+                                                        <button class="btn btn-sm btn-danger btn-delete px-2" data-id="{{ $row->id }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Hapus Wisata">
+                                                            <i class="feather icon-trash mx-auto"></i>
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -196,6 +196,33 @@ $title = 'Wisata';
             </form>
         </div>
     </div>
+
+    {{-- Modal Delete Travel --}}
+    <div class="modal fade" id="modal-delete-travel" tabindex="-1" role="dialog" style="z-index: 1050; display: none;"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form id="form-delete-travel" action="{{ route('travel.index') }}" method="post">
+                @method('DELETE')
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Konfirmasi Hapus Wisata</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p>Apakah anda yakin untuk menghapus wisata ini?</p>
+                        <p>Seluruh pesanan yang terkait dengan wisata juga akan terhapus!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary waves-effect waves-light ">Confirm</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
 
 @push('scripts')
@@ -211,6 +238,12 @@ $title = 'Wisata';
 
         $(document).ready(function() {
             $('#simpletable').DataTable();
+        });
+
+        $('.btn-delete').click(function () {
+            $('#modal-delete-travel').modal('show');
+            const id = $(this).data('id');
+            $('#form-delete-travel').attr('action', `${url}/${id}`);
         });
 
         // show modal if any errors

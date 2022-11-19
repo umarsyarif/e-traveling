@@ -99,7 +99,8 @@ class TravelController extends Controller
      */
     public function destroy(Travel $travel)
     {
-        //
+        $travel->delete();
+        return redirect()->back()->with('success', 'Berhasil');
     }
 
     function uploadTravelImage($file)

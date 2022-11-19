@@ -22,6 +22,7 @@ class CreateOrdersTable extends Migration
             $table->timestamp('accepted_at')->nullable();
             $table->integer('accepted_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

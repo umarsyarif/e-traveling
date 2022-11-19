@@ -24,6 +24,7 @@ Route::prefix('travel')->name('travel.')->group(function () {
     Route::get('/', [App\Http\Controllers\TravelController::class, 'index'])->name('index');
     Route::get('/{travel}', [App\Http\Controllers\TravelController::class, 'show'])->name('show');
     Route::put('/{travel}', [App\Http\Controllers\TravelController::class, 'update'])->name('update');
+    Route::delete('/{travel}', [App\Http\Controllers\TravelController::class, 'destroy'])->name('destroy');
     Route::post('/', [App\Http\Controllers\TravelController::class, 'store'])->name('store');
 
     // Customer

@@ -1,7 +1,8 @@
 @extends('layouts.app')
+
 @section('content')
     <!-- SubHeader =============================================== -->
-	<section class="parallax_window_in" data-parallax="scroll" data-image-src="img/sub_header_list_museum.jpg" data-natural-width="1400" data-natural-height="470">
+	<section class="parallax_window_in" data-parallax="scroll" data-image-src="{{ asset('main/img/sub_header_list_museum.jpg') }}" data-natural-width="1400" data-natural-height="470">
 		<div id="sub_content_in">
 			<div id="animate_intro">
 				<h1>Travel Tours</h1>
@@ -45,7 +46,7 @@
                                 <sup>Rp</sup>{{ $row->price }}
                             </div>
                             <div class="img_container">
-                                <a href="detail-page.html">
+                                <a href="{{ route('travel.details', ['travel' => $row->id]) }}">
                                     <img src="{{ asset($row->img) }}" width="800" height="533" class="img-responsive" alt="">
                                     <div class="short_info">
                                         <h3>{{ $row->name }}</h3>
@@ -53,9 +54,9 @@
                                         <p>
                                             {!! Str::limit($row->description, 120, ' ...') !!}
                                         </p>
-                                        {{-- <div class="score_wp">Superb
-                                            <div class="score">7.5</div>
-                                        </div> --}}
+                                        <div class="score_wp">Kuota
+                                            <div class="score">{{ $row->quota }}</div>
+                                        </div>
                                     </div>
                                 </a>
                             </div>
@@ -66,8 +67,9 @@
                 @endforeach
 
 				<nav class="pagination-wrapper">
-					<ul class="pagination">
-						<li><a href="#">1</a>
+                    <ul class="pagination">
+                        {{ $travels->links() }}
+						{{-- <li><a href="#">1</a>
 						</li>
 						<li><a href="#">2</a>
 						</li>
@@ -81,7 +83,7 @@
 							<a href="#" aria-label="Next">
 								<span aria-hidden="true">&raquo;</span>
 							</a>
-						</li>
+						</li> --}}
 					</ul>
 				</nav>
 				<!-- End pagination -->

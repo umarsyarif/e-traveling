@@ -73,8 +73,7 @@ $title = 'Wisata';
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $row->name }}</td>
-                                                    <td>{{ "{$row->start_date->format('d F Y')} - {$row->end_date->format('d F Y')}" }}
-                                                    </td>
+                                                    <td>{{ "{$row->start_date->format('d F Y')} - {$row->end_date->format('d F Y')}" }}</td>
                                                     <td>{{ $row->price_str }}</td>
                                                     <td>{{ "{$row->fullfiled_quota}/{$row->quota}" }}</td>
                                                     {{-- <td>{!! Str::limit($row->description, 60, ' ...') !!}</td> --}}

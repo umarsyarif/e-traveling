@@ -6,6 +6,7 @@ use App\Http\Requests\StoreTravelRequest;
 use App\Http\Requests\UpdateTravelRequest;
 use App\Models\Travel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class TravelController extends Controller
@@ -112,6 +113,18 @@ class TravelController extends Controller
         ];
 
         return view('main.pages.travel-list', $data);
+    }
+
+    public function details(Travel $travel)
+    {
+        $isOrdered = Auth::user()->isOrdered($travel->id);
+
+        $data = [
+            'travel' => $travel,
+            'isOrdered' => $isOrdered
+        ];
+
+        return view('main.pages.travel-details', $data);
     }
 
     private function uploadTravelImage($file)

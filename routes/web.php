@@ -22,7 +22,7 @@ Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard
 Route::prefix('travel')->name('travel.')->group(function () {
     // Customer
     Route::get('list', [App\Http\Controllers\TravelController::class, 'list'])->name('list');
-    Route::get('details', [App\Http\Controllers\TravelController::class, 'details'])->name('details');
+    Route::get('details/{travel}', [App\Http\Controllers\TravelController::class, 'details'])->name('details');
 
     // Admin
     Route::get('/', [App\Http\Controllers\TravelController::class, 'index'])->name('index');
@@ -33,6 +33,10 @@ Route::prefix('travel')->name('travel.')->group(function () {
 });
 
 Route::prefix('order')->name('order.')->group(function () {
+    // Customer
+    Route::get('/list', [App\Http\Controllers\OrderController::class, 'list'])->name('list');
+    Route::post('/', [App\Http\Controllers\OrderController::class, 'store'])->name('store');
+
     // Admin
     Route::get('/', [App\Http\Controllers\OrderController::class, 'index'])->name('index');
     Route::put('/{order}', [App\Http\Controllers\OrderController::class, 'update'])->name('update');

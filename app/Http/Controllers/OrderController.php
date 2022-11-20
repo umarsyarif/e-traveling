@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Travel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -25,7 +27,12 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $travel_id = $request->travel_id;
+        Auth::user()->orders()->create([
+            'travel_id' => $travel_id
+        ]);
+
+        return redirect()->route('travel.details', ['travel' => $travel_id]);
     }
 
     /**

@@ -12,7 +12,7 @@ class Order extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['is_accepted', 'testimoni'];
+    protected $fillable = ['travel_id', 'is_accepted', 'testimoni'];
 
     /**
      * The accessors to append to the model's array form.

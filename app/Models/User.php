@@ -44,8 +44,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // Getters
+    public function isOrdered($travel_id)
+    {
+        return $this->travels()->where('travel_id', $travel_id)->first() !== null;
+    }
+
+    // Setters
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function travels()
+    {
+        return $this->belongsToMany(Travel::class, 'orders');
     }
 }

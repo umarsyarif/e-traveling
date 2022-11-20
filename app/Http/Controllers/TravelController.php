@@ -103,7 +103,18 @@ class TravelController extends Controller
         return redirect()->back()->with('success', 'Berhasil');
     }
 
-    function uploadTravelImage($file)
+    public function list(Request $request)
+    {
+        $travels = Travel::paginate(9);
+
+        $data = [
+            'travels' => $travels
+        ];
+
+        return view('main.pages.travel-list', $data);
+    }
+
+    private function uploadTravelImage($file)
     {
         $path = Storage::putFile(
             'images/travel',

@@ -111,15 +111,7 @@
                                     </ul>
                                 </li>
                                 <li class="submenu">
-                                    <a href="javascript:void(0);" class="show-submenu">Tours</a>
-                                    <ul>
-                                        <li><a href="grid.html">Grid view</a>
-                                        </li>
-                                        <li><a href="list.html">List view</a>
-                                        </li>
-                                        <li><a href="detail-page.html">Tour Detail</a>
-                                        </li>
-                                    </ul>
+                                    <a href="{{ route('travel.list') }}" class="show-submenu">Wisata</a>
                                 </li>
                                 <li>
                                     <a href="about.html">About us</a>

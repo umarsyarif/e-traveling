@@ -20,16 +20,16 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
 
 Route::prefix('travel')->name('travel.')->group(function () {
+    // Customer
+    Route::get('list', [App\Http\Controllers\TravelController::class, 'list'])->name('list');
+    Route::get('details', [App\Http\Controllers\TravelController::class, 'details'])->name('details');
+
     // Admin
     Route::get('/', [App\Http\Controllers\TravelController::class, 'index'])->name('index');
     Route::get('/{travel}', [App\Http\Controllers\TravelController::class, 'show'])->name('show');
     Route::put('/{travel}', [App\Http\Controllers\TravelController::class, 'update'])->name('update');
     Route::delete('/{travel}', [App\Http\Controllers\TravelController::class, 'destroy'])->name('destroy');
     Route::post('/', [App\Http\Controllers\TravelController::class, 'store'])->name('store');
-
-    // Customer
-    Route::get('list', [App\Http\Controllers\TravelController::class, 'list'])->name('list');
-    Route::get('details', [App\Http\Controllers\TravelController::class, 'details'])->name('details');
 });
 
 Route::prefix('order')->name('order.')->group(function () {
@@ -40,5 +40,5 @@ Route::prefix('order')->name('order.')->group(function () {
 
 Route::prefix('user')->name('user.')->group(function () {
     // Admin
-    // Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('index');
+    Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('index');
 });

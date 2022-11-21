@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class ForgotPasswordController extends Controller
 {
@@ -19,4 +21,13 @@ class ForgotPasswordController extends Controller
     */
 
     use SendsPasswordResetEmails;
+
+    function sendResetLinkFailedResponse(Request $request, $response)
+    {
+        return back()->withInput()->withErrors(['email' => trans($response)]);
+    }
+    function sendResetLinkResponse(Request $request, $response)
+    {
+        return back()->with('forgot-password-email-success', trans($response));
+    }
 }

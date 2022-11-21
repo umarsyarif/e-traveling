@@ -332,6 +332,7 @@
             </div>
         </div>
         {{-- End Register Modal --}}
+
         {{-- Forgot Password Modal --}}
         <div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog"
             aria-labelledby="forgotPasswordModalLabel" aria-hidden="true" style="padding-top: 10rem">
@@ -346,7 +347,16 @@
                             @endforeach
                         </div>
                     @endif
-                    <form method="post" autocomplete="off">
+                    @if (session()->has('forgot-password-email-success'))
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <p>{{ session()->get('forgot-password-email-success') }}</p>
+                        </div>
+                    @endif
+                    <form method="post" action="{{ route('password.email') }}" autocomplete="off">
+                        @csrf
+                        <input type="hidden" name="type" value="forgot-password">
                         <div class="form-group">
                             <label>Email</label>
                             <input type="email" class="form-control" id="email" name="email"
@@ -355,13 +365,52 @@
                         <div class="form-group">
                             <button type="submit" class="btn_full" id="login">Reset Password</button>
                         </div>
-
                     </form>
-
                 </div>
             </div>
         </div>
         {{-- End Forgot Password Modal --}}
+
+        {{-- Reset Password Modal --}}
+        @isset($token)
+            <div class="modal fade" id="resetPasswordModal" tabindex="-1" role="dialog"
+                aria-labelledby="resetPasswordModalLabel" aria-hidden="true" style="padding-top: 10rem">
+                <div class="modal-dialog-centered modal-dialog" style="width: 400px;" role="document">
+                    <div class="box_style_2 pb-5">
+                        @if ($errors->any())
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                @foreach ($errors->all() as $error)
+                                    <p>{{ $error }}</p>
+                                @endforeach
+                            </div>
+                        @endif
+                        <form method="POST" action="{{ route('password.update') }}" autocomplete="off">
+                            @csrf
+                            <input type="hidden" name="type" value="reset-password">
+                            <input type="hidden" name="token" value="{{ $token }}">
+                            <input type="hidden" name="email" value="{{ $email ?? old('email') }}">
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <label>Konfirmasi Password</label>
+                                <input type="password" class="form-control" id="password_confirmation"
+                                    name="password_confirmation" placeholder="Konfirmasi Password">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn_full" id="login">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            {{-- End Reset Password Modal --}}
+        @endisset
     @endguest
 
 
@@ -420,6 +469,22 @@
                         $('#forgotPasswordModal').modal('show');
                     });
                 }
+            @endif
+            @if (session()->has('forgot-password-email-success'))
+                $(function() {
+                    $('#forgotPasswordModal').modal('show');
+                });
+            @endif
+            @isset($token)
+                $(function() {
+                    $('#resetPasswordModal').modal('show');
+                });
+            @endisset
+            @if (request()->get('token'))
+                console.log('tes');
+                $(function() {
+                    alert('tes');
+                });
             @endif
         </script>
     @endguest

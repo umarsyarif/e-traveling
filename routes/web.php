@@ -42,7 +42,14 @@ Route::prefix('order')->name('order.')->group(function () {
     Route::put('/{order}', [App\Http\Controllers\OrderController::class, 'update'])->name('update');
 });
 
-Route::prefix('user')->name('user.')->group(function () {
+// Route::prefix('user')->name('user.')->group(function () {
+//     // Admin
+//     Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('index');
+// });
+
+Route::prefix('karyawan')->name('employee.')->group(function () {
     // Admin
-    Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('index');
+    Route::get('/', [App\Http\Controllers\EmployeeController::class, 'index'])->name('index');
+    Route::post('/', [App\Http\Controllers\EmployeeController::class, 'store'])->name('store');
+    Route::delete('/{employee}', [App\Http\Controllers\EmployeeController::class, 'destroy'])->name('destroy');
 });

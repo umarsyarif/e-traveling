@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 <?php
-$title = 'Wisata';
+$title = 'Karyawan';
 ?>
 @section('title', $title)
 
@@ -42,12 +42,6 @@ $title = 'Wisata';
                         <div class="card">
                             <div class="card-header">
                                 <div class="btn-group" role="group">
-                                    <a href="{{ route('employee.index') }}"
-                                        class="btn btn-warning {{ Request::get('filter') != '' ? 'btn-outline-warning' : '' }} btn-sm waves-effect waves-light">Semua</a>
-                                    <a href="{{ route('employee.index', ['filter' => 'available']) }}"
-                                        class="btn btn-success {{ Request::get('filter') != 'available' ? 'btn-outline-success' : '' }} btn-sm waves-effect waves-light">Available</a>
-                                    <a href="{{ route('employee.index', ['filter' => 'closed']) }}"
-                                        class="btn btn-inverse {{ Request::get('filter') != 'closed' ? 'btn-outline-inverse' : '' }} btn-sm waves-effect waves-light">Closed</a>
                                 </div>
                                 <div class="card-header-right">
                                     <button type="button"
@@ -112,7 +106,7 @@ $title = 'Wisata';
         </div>
     </div>
 
-    {{-- Modal Wisata --}}
+    {{-- Modal Karyawan --}}
     <div class="modal fade" id="modal-karyawan" tabindex="-1" role="dialog" style="z-index: 1050; display: none;"
         aria-hidden="true">
         <div class="modal-dialog" role="document">

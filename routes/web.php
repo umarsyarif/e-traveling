@@ -53,3 +53,8 @@ Route::prefix('karyawan')->name('employee.')->group(function () {
     Route::post('/', [App\Http\Controllers\EmployeeController::class, 'store'])->name('store');
     Route::delete('/{employee}', [App\Http\Controllers\EmployeeController::class, 'destroy'])->name('destroy');
 });
+
+Route::prefix('laporan')->name('report.')->group(function () {
+    // Admin
+    Route::get('/', [App\Http\Controllers\ReportController::class, 'index'])->name('index');
+});

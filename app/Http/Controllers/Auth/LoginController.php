@@ -35,6 +35,6 @@ class LoginController extends Controller
 
     public function redirectTo()
     {
-        return route(Auth::user()->role !== 'customer' ? 'dashboard' : 'home');
+        return Auth::user()->role !== 'customer' ? route( 'dashboard') : url()->previous();
     }
 }

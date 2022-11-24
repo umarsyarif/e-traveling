@@ -117,7 +117,7 @@ class TravelController extends Controller
 
     public function details(Travel $travel)
     {
-        $isOrdered = Auth::user()->isOrdered($travel->id);
+        $isOrdered = optional(Auth::user())->isOrdered($travel->id);
 
         $data = [
             'travel' => $travel,

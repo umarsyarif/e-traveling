@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -39,7 +40,39 @@ class ReportController extends Controller
             'orders' => $orders
         ];
 
-        return view('report.index', $data);
+        return view('report.pdf.order', $data);
+    }
+    public function orderPDF(Request $request)
+    {
+
+        $acceptedDateStart = $request->acceptedDateStart;
+        $acceptedDateEnd = $request->acceptedDateEnd;
+
+        $createdDateStart = $request->createdDateStart;
+        $createdDateEnd = $request->createdDateEnd;
+
+        $orders = Order::when($acceptedDateStart != null, function ($q) use ($acceptedDateStart) {
+            return $q->where('accepted_at', '>=', $acceptedDateStart . ' 00:00:00');
+        })
+            ->when($acceptedDateEnd != null, function ($q) use ($acceptedDateEnd) {
+                return $q->where('accepted_at', '<=', $acceptedDateEnd . ' 23:59:59');
+            })
+            ->when($createdDateStart != null, function ($q) use ($createdDateStart) {
+                return $q->where('created_at', '>=', $createdDateStart . ' 00:00:00');
+            })
+            ->when($createdDateEnd != null, function ($q) use ($createdDateEnd) {
+                return $q->where('created_at', '<=', $createdDateEnd . ' 23:59:59');
+            })
+            ->with('travel', 'user')
+            ->get();
+
+        $data = [
+            'orders' => $orders
+        ];
+
+        $pdf = PDF::loadView('report.pdf.order', $data);
+
+        return $pdf->stream('user.pdf');
     }
 
     /**

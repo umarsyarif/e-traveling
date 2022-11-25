@@ -57,4 +57,5 @@ Route::prefix('karyawan')->name('employee.')->group(function () {
 Route::prefix('laporan')->name('report.')->group(function () {
     // Admin
     Route::get('/', [App\Http\Controllers\ReportController::class, 'index'])->name('index');
+    Route::get('/order-pdf', [App\Http\Controllers\ReportController::class, 'orderPDF'])->name('orderPDF');
 });

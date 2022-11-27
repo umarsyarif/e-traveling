@@ -43,7 +43,7 @@ $title = 'Laporan Transaksi';
                         <div class="card">
                             <div class="card-header">
                                 <div class="row pl-3">
-                                    <div class="col-4">
+                                    <div class="col-5">
                                         <div class="row">
                                             <span>Tgl. Disetujui: &nbsp;</span>
                                             <div id="acceptedDate"
@@ -62,7 +62,7 @@ $title = 'Laporan Transaksi';
                                         </div>
                                     </div>
 
-                                    <div class="col-4">
+                                    <div class="col-3">
                                         <div class="row">
                                             <form action="{{ route('report.index') }}" method="get">
                                                 <input type="hidden" name="acceptedDateStart" class="acceptedDateStart">
@@ -75,6 +75,14 @@ $title = 'Laporan Transaksi';
                                             </form>
                                             <button id="filterReset"
                                                 class="btn btn-primary btn-sm waves-effect waves-light btn-create mr-2">Reset</button>
+                                            <form action="{{ route('report.orderPDF') }}" method="get">
+                                                <input type="hidden" name="acceptedDateStart" class="acceptedDateStart">
+                                                <input type="hidden" name="acceptedDateEnd" class="acceptedDateEnd">
+                                                <input type="hidden" name="createdDateStart" class="createdDateStart">
+                                                <input type="hidden" name="createdDateEnd" class="createdDateEnd">
+                                                <button type="submit"
+                                                    class="btn btn-primary btn-sm waves-effect waves-light btn-create mr-2">Export
+                                                    PDF</button>
 
                                         </div>
                                     </div>

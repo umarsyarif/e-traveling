@@ -69,4 +69,13 @@ class OrderController extends Controller
     {
         //
     }
+
+    public function history()
+    {
+        $orders = Order::where('user_id', Auth::id())->with('travel')->get();
+        $data = [
+            'orders' => $orders,
+        ];
+        return view('main.pages.order-history', $data);
+    }
 }

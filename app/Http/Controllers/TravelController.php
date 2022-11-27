@@ -82,7 +82,7 @@ class TravelController extends Controller
         $validated = $request->validated();
 
         //Upload travel image
-        if(isset($validated['img'])){
+        if (isset($validated['img'])) {
             $validated['img'] = $this->uploadTravelImage($request->file('img'));
         }
 
@@ -130,9 +130,10 @@ class TravelController extends Controller
     private function uploadTravelImage($file)
     {
         $path = Storage::putFile(
-            'images/travel',
+            'public/images/travel',
             $file
         );
-        return "storage/{$path}";
+        $path = str_replace('public', '', $path);
+        return "storage{$path}";
     }
 }

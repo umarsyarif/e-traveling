@@ -40,7 +40,7 @@ class ReportController extends Controller
             'orders' => $orders
         ];
 
-        return view('report.pdf.order', $data);
+        return view('report.index', $data);
     }
     public function orderPDF(Request $request)
     {

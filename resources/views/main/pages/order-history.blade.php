@@ -3,12 +3,12 @@
 @section('content')
     <!-- SubHeader =============================================== -->
     <section class="parallax_window_in" data-parallax="scroll"
-        data-image-src="{{ asset('main/img/sub_header_list_museum.jpg') }}" data-natural-width="1400"
+        data-image-src="{{ asset('main/images/heshan-perera-aIJa8dPdzRI-unsplash.jpg') }}" data-natural-width="1400"
         data-natural-height="470">
         <div id="sub_content_in">
             <div id="animate_intro">
-                <h1>Travel Tours</h1>
-                <p>"Usu habeo equidem sanctus no ex melius labitur conceptam eos"</p>
+                <h1>Riwayat Order</h1>
+                <p>Semua order travel kamu tercatat disini</p>
             </div>
         </div>
     </section>
@@ -20,18 +20,15 @@
         <div id="filters" class="clearfix">
             <div id="sort_filters">
                 <select name="orderby" class="selectbox">
-                    <option value="popularity">Sort by Popularity</option>
-                    <option value="rating">Sort by Average Rating</option>
-                    <option value="date" selected='selected'>Sort by Newness</option>
-                    <option value="price">Sort by Price: Low to High</option>
-                    <option value="price-desc">Sort by Price: High to Low</option>
+                    <option value="date" selected='selected'>Terbaru</option>
+                    <option value="date">Terlama</option>
                 </select>
             </div>
             <div id="view_change">
-                <a href="grid.html" class="grid_bt"></a>
-                <a href="list.html" class="list_bt"></a>
+                <a href="{{ route('travel.list') }}"><strong>PESAN BARU</strong></a>
             </div>
         </div>
+
         <!-- End filters -->
 
 

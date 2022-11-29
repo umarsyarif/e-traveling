@@ -25,10 +25,16 @@
                     <span class="pcoded-mtext">Pesanan</span>
                 </a>
             </li>
-            <li class="{{ Request::is('user') ? 'active' : '' }}">
+            <li class="{{ Request::is('karyawan') ? 'active' : '' }}">
                 <a href="{{ route('employee.index') }}">
                     <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
                     <span class="pcoded-mtext">Karyawan</span>
+                </a>
+            </li>
+            <li class="{{ Request::is('laporan') ? 'active' : '' }}">
+                <a href="{{ route('report.index') }}">
+                    <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
+                    <span class="pcoded-mtext">Laporan</span>
                 </a>
             </li>
             {{-- @endif --}}

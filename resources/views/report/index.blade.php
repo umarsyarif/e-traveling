@@ -74,14 +74,14 @@ $title = 'Laporan Transaksi';
 
                                             </form>
                                             <button id="filterReset"
-                                                class="btn btn-primary btn-sm waves-effect waves-light btn-create mr-2">Reset</button>
+                                                class="btn btn-warning btn-sm waves-effect waves-light btn-create mr-2">Reset</button>
                                             <form action="{{ route('report.orderPDF') }}" method="get">
                                                 <input type="hidden" name="acceptedDateStart" class="acceptedDateStart">
                                                 <input type="hidden" name="acceptedDateEnd" class="acceptedDateEnd">
                                                 <input type="hidden" name="createdDateStart" class="createdDateStart">
                                                 <input type="hidden" name="createdDateEnd" class="createdDateEnd">
                                                 <button type="submit"
-                                                    class="btn btn-primary btn-sm waves-effect waves-light btn-create mr-2">Export
+                                                    class="btn btn-success btn-sm waves-effect waves-light btn-create mr-2">Export
                                                     PDF</button>
 
                                         </div>

@@ -78,4 +78,11 @@ class OrderController extends Controller
         ];
         return view('main.pages.order-history', $data);
     }
+
+    public function testimonialUpdate(Request $request)
+    {
+        $order = Order::findOrFail($request->id);
+        $order->update($request->only('testimoni'));
+        return redirect()->back()->with('success', 'Testimoni berhasil disimpan. Terimakasih!');
+    }
 }

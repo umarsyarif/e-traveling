@@ -37,6 +37,7 @@ Route::prefix('order')->name('order.')->group(function () {
     Route::get('/list', [App\Http\Controllers\OrderController::class, 'list'])->name('list');
     Route::post('/', [App\Http\Controllers\OrderController::class, 'store'])->name('store');
     Route::get('/riwayat', [App\Http\Controllers\OrderController::class, 'history'])->name('history');
+    Route::post('/testimoni', [App\Http\Controllers\OrderController::class, 'testimonialUpdate'])->name('testimonialUpdate');
 
     // Admin
     Route::get('/', [App\Http\Controllers\OrderController::class, 'index'])->name('index');

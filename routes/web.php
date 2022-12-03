@@ -35,6 +35,7 @@ Route::prefix('travel')->name('travel.')->group(function () {
 Route::prefix('order')->name('order.')->group(function () {
     // Customer
     Route::get('/list', [App\Http\Controllers\OrderController::class, 'list'])->name('list');
+    Route::get('detail/{order}', [App\Http\Controllers\OrderController::class, 'orderDetail'])->name('orderDetail');
     Route::post('/', [App\Http\Controllers\OrderController::class, 'store'])->name('store');
     Route::get('/riwayat', [App\Http\Controllers\OrderController::class, 'history'])->name('history');
     Route::post('/testimoni', [App\Http\Controllers\OrderController::class, 'testimonialUpdate'])->name('testimonialUpdate');

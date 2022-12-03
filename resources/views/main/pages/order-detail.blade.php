@@ -2,12 +2,12 @@
 
 @section('content')
     <!-- SubHeader =============================================== -->
-    <section class="parallax_window_in" data-parallax="scroll" data-image-src="{{ asset($travel->img) }}"
+    <section class="parallax_window_in" data-parallax="scroll" data-image-src="{{ asset($order->travel->img) }}"
         data-natural-width="1400" data-natural-height="470">
         <div id="sub_content_in">
             <div id="animate_intro">
-                <h1>{{ $travel->name }}</h1>
-                <p>{{ "{$travel->start_date->format('d F Y')} - {$travel->end_date->format('d F Y')}" }}</p>
+                <h1>{{ $order->travel->name }}</h1>
+                <p>{{ "{$order->travel->start_date->format('d F Y')} - {$order->travel->end_date->format('d F Y')}" }}</p>
             </div>
         </div>
     </section>
@@ -22,12 +22,13 @@
                 <div class="col-md-8">
 
                     <div class="owl-carousel owl-theme carousel_detail add_bottom_15">
-                        <div class="item"><img src="{{ asset('main/img/carousel/carousel_in_1.jpg') }}" alt="">
+                        <div class="item"><img src="{{ asset($order->travel->img) }}" style="object-fit: cover"
+                                alt="">
                         </div>
-                        <div class="item"><img src="{{ asset('main/img/carousel/carousel_in_2.jpg') }}" alt="">
+                        {{-- <div class="item"><img src="{{ asset('main/img/carousel/carousel_in_2.jpg') }}" alt="">
                         </div>
                         <div class="item"><img src="{{ asset('main/img/carousel/carousel_in_3.jpg') }}" alt="">
-                        </div>
+                        </div> --}}
                     </div>
 
                     <ul class="nav nav-tabs">
@@ -43,7 +44,7 @@
                         <div class="tab-pane fade in active" id="tab_1">
 
                             <p>
-                                {!! $travel->description !!}
+                                {!! $order->travel->description !!}
                             </p>
                             <div class="row">
                                 <div class="col-md-6">
@@ -292,7 +293,8 @@
                 <aside class="col-md-4">
                     <div class="box_style_1">
                         <div class="price">
-                            <strong>{{ $travel->price_str }}</strong><small>per person</small>
+                            <strong style="font-size: 3rem">{{ $order->travel->price_str }}</strong><br><small>per
+                                person</small>
                         </div>
                         <ul class="list_ok">
                             <li>Tiket Pesawat</li>
@@ -305,12 +307,12 @@
                         <h3>Book Your Tour<span>Free service - Confirmed immediately</span></h3>
                         <div id="message-booking"></div>
                         @auth
-                            @if ($isOrdered)
+                            @if (true)
                                 <a href=""><button class="btn_full">Riwayat Order</button></a>
                             @else
-                                <form method="post" action="{{ route('order.store', ['travel' => $travel->id]) }}">
+                                <form method="post" action="{{ route('order.store', ['travel' => $order->travel->id]) }}">
                                     @csrf
-                                    <input type="hidden" id="travel_id" name="travel_id" value="{{ $travel->id }}">
+                                    <input type="hidden" id="travel_id" name="travel_id" value="{{ $order->travel->id }}">
                                     {{-- <table id="tickets" class="table">
                                     <thead>
                                         <tr>
@@ -447,4 +449,9 @@
         <!-- End container -->
     </section>
     <!-- End section -->
+@endsection
+@section('import-js')
+    <!-- SPECIFIC SCRIPTS -->
+
+    <script src="{{ asset('main/js/sidebar_carousel_detail_page_func.js') }}"></script>
 @endsection

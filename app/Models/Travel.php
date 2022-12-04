@@ -99,7 +99,7 @@ class Travel extends Model
 
     public function getImgAttribute($value)
     {
-        return $value ?? '/main/img/tour_list_1.jpg';
+        return !empty($value) ? $value : '/main/img/tour_list_1.jpg';
     }
 
     // Setters

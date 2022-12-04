@@ -18,12 +18,6 @@
     <section class="wrapper">
         <div class="divider_border_gray"></div>
         <div id="filters" class="clearfix">
-            <div id="sort_filters">
-                <select name="orderby" class="selectbox">
-                    <option value="date" selected='selected'>Terbaru</option>
-                    <option value="date">Terlama</option>
-                </select>
-            </div>
             <div id="view_change">
                 <a href="{{ route('travel.list') }}"><strong>PESAN BARU</strong></a>
             </div>
@@ -71,6 +65,14 @@
                 </div>
             </div>
         @endforeach
+
+        <nav class="pagination-wrapper">
+            <ul class="pagination">
+                {{ $orders->links() }}
+            </ul>
+        </nav>
+        <!-- End pagination -->
+
     </div>
     <!-- End container -->
 </section>

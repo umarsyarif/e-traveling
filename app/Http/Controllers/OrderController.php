@@ -99,7 +99,7 @@ class OrderController extends Controller
 
     public function history()
     {
-        $orders = Order::where('user_id', Auth::id())->with('travel')->get();
+        $orders = Order::where('user_id', Auth::id())->with('travel')->paginate(10);
         $data = [
             'orders' => $orders,
         ];

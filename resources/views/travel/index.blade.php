@@ -85,7 +85,7 @@ $title = 'Wisata';
                                                     </td>
                                                     <td>
                                                         <a href="{{ route('travel.show', $row->id) }}"
-                                                            class="btn btn-sm btn-success px-2" data-toggle="tooltip"
+                                                            class="btn btn-sm btn-primary px-2" data-toggle="tooltip"
                                                             data-placement="top" title=""
                                                             data-original-title="Check Orders">
                                                             <i class="feather icon-info mx-auto"></i>

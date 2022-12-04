@@ -112,7 +112,7 @@
                                     </tbody>
                                 </table>
                                 <div class="text-right m-r-20">
-                                    <a href="{{ route('travel.index') }}" class=" b-b-primary text-primary">View all Projects</a>
+                                    <a href="{{ route('travel.index') }}" class=" b-b-primary text-primary">Lihat semua wisata</a>
                                 </div>
                             </div>
                         </div>

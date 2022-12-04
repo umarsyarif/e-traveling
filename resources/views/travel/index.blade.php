@@ -78,7 +78,6 @@ $title = 'Wisata';
                                                     <td>{{ "{$row->start_date->format('d F Y')} - {$row->end_date->format('d F Y')}" }}</td>
                                                     <td>{{ $row->price_str }}</td>
                                                     <td>{{ "{$row->fullfiled_quota}/{$row->quota}" }}</td>
-                                                    {{-- <td>{!! Str::limit($row->description, 60, ' ...') !!}</td> --}}
                                                     <td>
                                                         <span
                                                             class="badge bg-{{ $row->status == 'Full' ? 'warning' : ($row->status == 'Available' ? 'success' : 'inverse') }}">{{ $row->status }}</span>
@@ -90,7 +89,7 @@ $title = 'Wisata';
                                                             data-original-title="Check Orders">
                                                             <i class="feather icon-info mx-auto"></i>
                                                         </a>
-                                                        @if (Auth::user()->role === 'pegawai')
+                                                        @if (Auth::user()->role === 'pegawai' && $row->is_available)
                                                             <button class="btn btn-sm btn-danger btn-delete px-2" data-id="{{ $row->id }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Hapus Wisata">
                                                                 <i class="feather icon-trash mx-auto"></i>
                                                             </button>

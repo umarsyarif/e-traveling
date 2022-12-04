@@ -84,7 +84,7 @@ $title = $travel->name;
                                         </span>
                                     </div>
                                 </div>
-                                @if (Auth::user()->role === 'pegawai')
+                                @if (Auth::user()->role === 'pegawai' && $travel->is_available)
                                     <button id="btn-edit-travel" class="btn btn-warning btn-sm waves-effect waves-light float-right mt-2">Edit</button>
                                 @endif
                             </div>
@@ -164,7 +164,7 @@ $title = $travel->name;
                                                 <th>Nama</th>
                                                 <th>Tanggal</th>
                                                 <th>Status</th>
-                                                @if (Auth::user()->role === 'pegawai')
+                                                @if ($travel->is_editable)
                                                     <th>Actions</th>
                                                 @endif
                                             </tr>
@@ -179,15 +179,15 @@ $title = $travel->name;
                                                         <span
                                                             class="badge bg-{{ !$row->is_accepted ? 'warning' : 'success' }}">{{ $row->status }}</span>
                                                     </td>
-                                                    @if (Auth::user()->role === 'pegawai')
+                                                    @if ($travel->is_editable)
                                                         <td>
-                                                            @if ($travel->status == 'Available')
-                                                                <button class="btn btn-sm btn-inverse btn-update-order px-2"
+                                                            @if ($travel->status == 'Available' && !$row->accepted_at)
+                                                                <button class="btn btn-sm btn-primary btn-update-order px-2"
                                                                     data-id="{{ $row->id }}"
                                                                     data-toggle="tooltip"
                                                                     data-placement="top"
                                                                     data-original-title="Accept Order">
-                                                                    <i class="feather icon-info mx-auto"></i>
+                                                                    <i class="feather icon-check-circle mx-auto"></i>
                                                                 </button>
                                                             @endif
                                                         </td>
@@ -201,7 +201,7 @@ $title = $travel->name;
                                                 <th>Nama</th>
                                                 <th>Tanggal</th>
                                                 <th>Status</th>
-                                                @if (Auth::user()->role === 'pegawai')
+                                                @if ($travel->is_editable)
                                                     <th>Actions</th>
                                                 @endif
                                             </tr>
@@ -209,6 +209,11 @@ $title = $travel->name;
                                     </table>
                                 </div>
                             </div>
+                            @if ($travel->is_available && !$travel->is_quota_not_fulfilled)
+                                <div class="card-footer">
+                                    <small class="text-danger">Kuota pada wisata ini telah terpenuhi, silahkan tambah kuota jika ingin menyetujui pesanan baru</small>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

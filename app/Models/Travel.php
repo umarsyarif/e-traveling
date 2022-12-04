@@ -6,6 +6,7 @@ use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Travel extends Model
 {
@@ -33,6 +34,7 @@ class Travel extends Model
     protected $appends = [
         'is_available',
         'is_quota_not_fulfilled',
+        'is_editable',
         'fulfilled_quota',
         'price_str',
         'status'
@@ -59,6 +61,11 @@ class Travel extends Model
     public function getIsQuotaNotFulfilledAttribute()
     {
         return $this->getFullfiledQuotaAttribute() < $this->attributes['quota'];
+    }
+
+    public function getIsEditableAttribute()
+    {
+        return Auth::user()->role == 'pegawai' && $this->getIsAvailableAttribute() && $this->getIsQuotaNotFulfilledAttribute();
     }
 
     public function getFullfiledQuotaAttribute()

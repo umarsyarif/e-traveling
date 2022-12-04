@@ -71,12 +71,9 @@ $title = 'Karyawan';
                                                     <td>{{ $employee->phone_number ? $employee->phone_number : '—' }}
                                                     </td>
                                                     <td>
-                                                        <a href="{{ route('travel.show', $employee->id) }}"
-                                                            class="btn btn-sm btn-inverse px-2" data-toggle="tooltip"
-                                                            data-placement="top" title=""
-                                                            data-original-title="Check Orders">
-                                                            <i class="feather icon-info mx-auto"></i>
-                                                        </a>
+                                                        <button class="btn btn-sm btn-warning btn-change-pw px-2" data-id="{{ $employee->id }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Ubah Password">
+                                                            <i class="feather icon-unlock mx-auto"></i>
+                                                        </button>
                                                         <button class="btn btn-sm btn-danger btn-delete px-2"
                                                             data-id="{{ $employee->id }}" data-toggle="tooltip"
                                                             data-placement="top" title=""
@@ -174,7 +171,7 @@ $title = 'Karyawan';
         </div>
     </div>
 
-    {{-- Modal Delete Travel --}}
+    {{-- Modal Delete Karyawan --}}
     <div class="modal fade" id="modal-delete-karyawan" tabindex="-1" role="dialog"
         style="z-index: 1050; display: none;" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -200,6 +197,50 @@ $title = 'Karyawan';
             </form>
         </div>
     </div>
+
+    {{-- Modal Change Password --}}
+    <div class="modal fade" id="modal-change-password" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Ubah Password</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="form-change-password" action="" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-body">
+                        @if($errors->any())
+                            <div class="alert alert-warning background-warning">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <i class="icofont icofont-close-line-circled text-white"></i>
+                                </button>
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{$error}}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <div class="form-group form-primary">
+                            <input type="password" id="password1" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password Baru" value="{{ old('password') }}" required>
+                            <span class="form-bar"></span>
+                        </div>
+                        <div class="form-group form-primary">
+                            <input type="password" id="password2" name="password2" class="form-control @error('password2') is-invalid @enderror" placeholder="Konfirmasi Password Baru" value="{{ old('password2') }}" required>
+                            <span class="form-bar"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary waves-effect waves-light">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('scripts')
@@ -207,14 +248,29 @@ $title = 'Karyawan';
     <script src="{{ asset('adminty\bower_components\datatables.net\js\jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('adminty\bower_components\datatables.net-bs4\js\dataTables.bootstrap4.min.js') }}"></script>
     <!-- form-mask js -->
-    <script src="{{ asset('adminty/assets/pages/form-masking/autoNumeric.js') }}"></script>
-    <script src="{{ asset('adminty/assets/pages/form-masking/form-mask.js') }}"></script>
+    {{-- <script src="{{ asset('adminty/assets/pages/form-masking/autoNumeric.js') }}"></script> --}}
+    {{-- <script src="{{ asset('adminty/assets/pages/form-masking/form-mask.js') }}"></script> --}}
     <script>
         const url = '{{ route('employee.index') }}';
         const csrf = '{{ csrf_token() }}';
 
         $(document).ready(function() {
             $('#simpletable').DataTable();
+        });
+
+        // on change passwd
+        $('.btn-change-pw').click(function() {
+            $('#modal-change-password').modal('show');
+            const id = $(this).data('id');
+            $('#form-change-password').attr('action', `${url}/${id}`);
+        });
+        $('#form-change-password').submit(function(event) {
+            const password = $('#password1').val();
+            const password2 = $('#password2').val();
+            if(password != password2){
+                event.preventDefault();
+                notify('fas fa-check', 'danger', 'Konfirmasi Password harus sama!');
+            }
         });
 
         $('.btn-delete').click(function() {

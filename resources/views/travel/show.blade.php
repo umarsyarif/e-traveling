@@ -268,6 +268,7 @@ $title = $travel->name;
 
         $(document).ready(function() {
             $('#simpletable').DataTable({
+                'autoWidth': false,
                 dom: 'Bfrtip',
                 buttons: [
                     {extend:'pdfHtml5',exportOptions:{columns:[0,1,2,3]},className:'btn btn-sm btn-inverse', text:'Download'}

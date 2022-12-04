@@ -50,5 +50,6 @@ Route::prefix('karyawan')->name('employee.')->group(function () {
     // Admin
     Route::get('/', [App\Http\Controllers\EmployeeController::class, 'index'])->name('index');
     Route::post('/', [App\Http\Controllers\EmployeeController::class, 'store'])->name('store');
+    Route::put('/{employee}', [App\Http\Controllers\EmployeeController::class, 'update'])->name('update');
     Route::delete('/{employee}', [App\Http\Controllers\EmployeeController::class, 'destroy'])->name('destroy');
 });

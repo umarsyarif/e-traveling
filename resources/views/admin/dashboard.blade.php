@@ -105,7 +105,7 @@
                                                     <label class="label label-{{ $item->status == 'Full' ? 'warning' : ($item->status == 'Available' ? 'success' : 'inverse') }}">{{ $item->status }}</label>
                                                 </td>
                                                 <td>{{ $item->name }}</td>
-                                                <td>{{ "{$item->fullfiled_quota}/{$item->quota}" }}</td>
+                                                <td>{{ "{$item->fulfiled_quota}/{$item->quota}" }}</td>
                                                 <td>{{ $item->start_date->diffForHumans() }}</td>
                                             </tr>
                                         @endforeach

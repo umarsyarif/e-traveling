@@ -48,7 +48,8 @@
                             </div>
                             <div class="img_container">
                                 <a href="{{ route('travel.details', ['travel' => $row->id]) }}">
-                                    <img src="{{ asset($row->img) }}" width="800" height="200">
+                                    <img src="{{ asset($row->img) }}" width="800" height="200"
+                                        style="object-fit: cover">
                                     <div class="short_info">
                                         <h3>{{ $row->name }}</h3>
                                         <em>Duration {{ $row->duration }} days</em>

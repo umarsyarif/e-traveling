@@ -106,6 +106,17 @@ class OrderController extends Controller
         return view('main.pages.order-history', $data);
     }
 
+    public function orderDetail(Order $order)
+    {
+        $order = $order->with(['user', 'travel'])->first();
+
+        $data = [
+            'order' => $order
+        ];
+
+        return view('main.pages.order-detail', $data);
+    }
+
     public function testimonialUpdate(Request $request)
     {
         $order = Order::findOrFail($request->id);

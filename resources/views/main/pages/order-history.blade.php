@@ -40,15 +40,15 @@
             @endif
             @foreach ($orders as $order)
                 <div class="row strip_list wow fadeIn animated" data-wow-delay="0.2s">
-                    <div class="col-md-3">
+                    <div class="col-md-3" style="padding-top: 20px">
                         <div class="img_wrapper">
                             <div class="price_grid">
                                 <sup>Rp. </sup>{{ number_format($order->travel->price, 2, ',', '.') }}
                             </div>
                             <div class="img_container">
-                                <a href="detail-page.html">
-                                    <img src="{{ asset($order->travel->img) }}" width="400" class="img-responsive"
-                                        alt="">
+                                <a href="{{ route('order.orderDetail', ['order' => $order->id]) }}">
+                                    <img src="{{ asset($order->travel->img) }}" width="400" height="150"
+                                        style="object-fit: cover" alt="">
                                 </a>
                             </div>
                         </div>
@@ -61,55 +61,56 @@
                         @empty(!$order->testimoni)
                             <p><strong>Testimoni anda:</strong> <em>{{ $order->testimoni }}</em></p>
                         @endempty
-                        <p><a><button class="btn_1">Detail Order</button></a>
-                            @empty($order->testimoni)
+                        <p><a href="{{ route('order.orderDetail', ['order' => $order->id]) }}"><button class="btn_1">Detail
+                                    Order</button></a>
+                            @if ($order->testimoni == null && $order->is_accepted == 1)
                                 <button class="btn_1" data-toggle="modal" data-target="#testimonialModal"
                                     data-id="{{ $order->id }}">Beri Testimoni</button>
                             @endempty
-                        </p>
-                    </div>
+                    </p>
                 </div>
-            @endforeach
-        </div>
-        <!-- End container -->
-    </section>
-    <!-- End section -->
-    {{-- Testimoni Modal --}}
-    <div class="modal fade" id="testimonialModal" tabindex="-1" role="dialog" aria-labelledby="testimonialModalLabel"
-        aria-hidden="true" style="padding-top: 10rem">
-        <div class="modal-dialog-centered modal-dialog" style="width: 400px;" role="document">
-            <div class="box_style_2 pb-5">
-                <form method="POST" action="{{ route('order.testimonialUpdate') }}" autocomplete="off">
-                    @csrf
-                    <input type="hidden" name="id">
-                    <div class="form-group">
-                        {{-- <label>Password</label> --}}
-                        <textarea class="form-control" style="resize:vertical" id="testimoni" name="testimoni" placeholder="Testimoni anda..."></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn_full" id="testimonial-button">Simpan</button>
-                    </div>
-                </form>
             </div>
+        @endforeach
+    </div>
+    <!-- End container -->
+</section>
+<!-- End section -->
+{{-- Testimoni Modal --}}
+<div class="modal fade" id="testimonialModal" tabindex="-1" role="dialog" aria-labelledby="testimonialModalLabel"
+    aria-hidden="true" style="padding-top: 10rem">
+    <div class="modal-dialog-centered modal-dialog" style="width: 400px;" role="document">
+        <div class="box_style_2 pb-5">
+            <form method="POST" action="{{ route('order.testimonialUpdate') }}" autocomplete="off">
+                @csrf
+                <input type="hidden" name="id">
+                <div class="form-group">
+                    {{-- <label>Password</label> --}}
+                    <textarea class="form-control" style="resize:vertical" id="testimoni" name="testimoni" placeholder="Testimoni anda..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn_full" id="testimonial-button">Simpan</button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 @endsection
 @section('custom-js')
-    <script>
-        $('#testimonialModal').on('show.bs.modal', function(e) {
+<script>
+    $('#testimonialModal').on('show.bs.modal', function(e) {
 
-            //get data-id attribute of the clicked element
-            var id = $(e.relatedTarget).data('id');
+        //get data-id attribute of the clicked element
+        var id = $(e.relatedTarget).data('id');
 
-            //populate the textbox
-            $(e.currentTarget).find('input[name="id"]').val(id);
+        //populate the textbox
+        $(e.currentTarget).find('input[name="id"]').val(id);
 
-        });
-        $(document).ready(function() {
-            setTimeout(function() {
-                $(".alert").alert('close');
-            }, 3000);
-        });
-    </script>
+    });
+    $(document).ready(function() {
+        setTimeout(function() {
+            $(".alert").alert('close');
+        }, 3000);
+    });
+</script>
 @endsection

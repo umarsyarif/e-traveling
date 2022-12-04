@@ -1,19 +1,44 @@
 @extends('layouts.app')
+
+@section('import-css')
+    <link href="{{ asset('main/layerslider/css/layerslider.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
-	<!-- SubHeader =============================================== -->
-	<section class="header-video">
-		<div id="hero_video">
-			<div id="animate_intro">
-				<h3>Enjoy a Perfect Tour</h3>
-				<p>
-					Find the best Tours and Excursion at the best price
+
+    <!-- Slider -->
+	<div id="full-slider-wrapper">
+		<div id="layerslider" style="width:100%;height:600px;">
+			<!-- first slide -->
+			<div class="ls-slide" data-ls="slidedelay: 5000; transition2d:85;">
+				<img src="{{ asset('main/img/slides/slide_2.jpg') }}" class="ls-bg" alt="Slide background">
+				<h3 class="ls-l slide_typo" style="top: 45%; left: 50%;" data-ls="offsetxin:0;durationin:2000;delayin:1000;easingin:easeOutElastic;rotatexin:90;transformoriginin:50% bottom 0;offsetxout:0;rotatexout:90;transformoriginout:50% bottom 0;">More than 100 tours available</h3>
+				<p class="ls-l slide_typo_2" style="top:55%; left:50%;" data-ls="durationin:2000;delayin:1000;easingin:easeOutElastic;">
+					Historic Buildings - Attractions - Museums
 				</p>
+				<a class="ls-l button_intro_2 outline" style="top:65%; left:50%;white-space: nowrap;" data-ls="durationin:2000;delayin:1400;easingin:easeOutElastic;" href='grid.html'>Read more</a>
+			</div>
+			<!-- second slide -->
+			<div class="ls-slide" data-ls="slidedelay:5000; transition2d:103;">
+				<img src="{{ asset('main/img/slides/slide_3.jpg') }}" class="ls-bg" alt="Slide background">
+				<h3 class="ls-l slide_typo" style="top: 45%; left: 50%;" data-ls="offsetxin:0;durationin:2000;delayin:1000;easingin:easeOutElastic;rotatexin:90;transformoriginin:50% bottom 0;offsetxout:0;rotatexout:90;transformoriginout:50% bottom 0;">Discover Fantastic Places</h3>
+				<p class="ls-l slide_typo_2" style="top:55%; left:50%;" data-ls="durationin:2000;delayin:1000;easingin:easeOutElastic;">
+					We offer a variety of services and options
+				</p>
+				<a class="ls-l button_intro_2 outline" style="top:65%; left:50%;white-space: nowrap;" data-ls="durationin:2000;delayin:1400;easingin:easeOutElastic;" href='grid.html'>Read more</a>
+			</div>
+			<!-- third slide -->
+			<div class="ls-slide" data-ls="slidedelay: 5000; transition2d:5;">
+				<img src="{{ asset('main/img/slides/slide_1.jpg') }}" class="ls-bg" alt="Slide background">
+				<h3 class="ls-l slide_typo" style="top:45%; left: 50%;" data-ls="offsetxin:0;durationin:2000;delayin:1000;easingin:easeOutElastic;rotatexin:90;transformoriginin:50% bottom 0;offsetxout:0;rotatexout:90;transformoriginout:50% bottom 0;">Enjoy a Lovely Tour</h3>
+				<p class="ls-l slide_typo_2" style="top:55%; left:50%;" data-ls="durationin:2000;delayin:1000;easingin:easeOutElastic;">
+					Buildings - Attractions - Museums
+				</p>
+				<a class="ls-l button_intro_2" style="top:65%; left:50%;" data-ls="durationin:2000;delayin:1400;easingin:easeOutElastic;" href='grid.html'>Explore</a>
 			</div>
 		</div>
-		<img src="{{ asset('main/img/video_fix.png') }}" alt="" class="header-video--media" data-video-src="{{ asset('main/video/intro') }}" data-teaser-source="{{ asset('main/video/intro') }}" data-provider="" data-video-width="1920" data-video-height="750">
-	</section>
-	<!-- End Header video -->
-	<!-- End SubHeader ============================================ -->
+	</div>
+	<!-- End layerslider -->
 
 	<section class="wrapper">
 		<div class="divider_border"></div>
@@ -386,14 +411,24 @@
 @endsection
 
 @section('custom-js')
-<script src="{{ asset('main/js/video_header.js') }}"></script>
-<script>
-		'use strict';
-		HeaderVideo.init({
-			container: $('.header-video'),
-			header: $('.header-video--media'),
-			videoTrigger: $("#video-trigger"),
-			autoPlayVideo: true
-		});
-	</script>
+<script src="{{ asset('main/layerslider/js/greensock.js') }}"></script>
+<script src="{{ asset('main/layerslider/js/layerslider.transitions.js') }}"></script>
+<script src="{{ asset('main/layerslider/js/layerslider.kreaturamedia.jquery.js') }}"></script>
+
+<script type="text/javascript">
+    'use strict';
+    $('#layerslider').layerSlider({
+        autoStart: true,
+        navButtons: false,
+        navStartStop: false,
+        showCircleTimer: false,
+        responsive: true,
+        responsiveUnder: 1280,
+        layersContainer: 1200,
+        skinsPath: 'main/layerslider/skins/'
+            // Please make sure that you didn't forget to add a comma to the line endings
+            // except the last line!
+    });
+</script>
+
 @endsection

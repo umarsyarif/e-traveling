@@ -34,12 +34,12 @@
                 <li class="user-profile header-notification">
                     <div class="dropdown-primary dropdown">
                         <div class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{ asset('adminty\assets\images\avatar-4.jpg') }}" class="img-radius" alt="User-Profile-Image">
+                            {{-- <img src="{{ asset('adminty\assets\images\avatar-4.jpg') }}" class="img-radius" alt="User-Profile-Image"> --}}
                             <span>{{ Auth::user()->name }}</span>
                             <i class="feather icon-chevron-down"></i>
                         </div>
                         <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                            <li>
+                            {{-- <li>
                                 <a href="#!">
                                     <i class="feather icon-settings"></i> Settings
                                 </a>
@@ -48,7 +48,7 @@
                                 <a href="user-profile.htm">
                                     <i class="feather icon-user"></i> Profile
                                 </a>
-                            </li>
+                            </li> --}}
                             <li onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
                                 <a href="javascript:void(0)">

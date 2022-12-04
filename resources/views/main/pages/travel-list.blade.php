@@ -18,25 +18,22 @@
         <div class="divider_border_gray"></div>
         <div id="filters" class="clearfix">
             <div id="sort_filters">
-                <select name="orderby" class="selectbox">
-                    <option value="popularity">Sort by Popularity</option>
-                    <option value="rating">Sort by Average Rating</option>
-                    <option value="date" selected='selected'>Sort by Newness</option>
-                    <option value="price">Sort by Price: Low to High</option>
-                    <option value="price-desc">Sort by Price: High to Low</option>
+                <select id="orderBy" name="orderby" class="selectbox">
+                    <option value="date" {{ $filter == 'date' ? 'selected' : '' }}>Sort by Newness</option>
+                    <option value="price" {{ $filter == 'price' ? 'selected' : '' }}>Sort by Price: Low to High</option>
+                    <option value="price-desc" {{ $filter == 'price-desc' ? 'selected' : '' }}>Sort by Price: High to Low</option>
                 </select>
             </div>
-            <div id="view_change">
+            {{-- <div id="view_change">
                 <a href="grid.html" class="grid_bt"></a>
                 <a href="list.html" class="list_bt"></a>
-            </div>
+            </div> --}}
         </div>
         <!-- End filters -->
 
 
         <div class="container">
             <div class="row">
-
                 @foreach ($travels as $row)
                     <div class="col-md-4 col-sm-6 wow fadeIn animated" data-wow-delay="0.2s">
                         <div class="img_wrapper">
@@ -56,8 +53,8 @@
                                         <p>
                                             {!! Str::limit($row->description, 120, ' ...') !!}
                                         </p>
-                                        <div class="score_wp">Kuota
-                                            <div class="score">{{ $row->quota }}</div>
+                                        <div class="score_wp">Sisa Kuota
+                                            <div class="score">{{ $row->quota - $row->fulfilled_quota }}</div>
                                         </div>
                                     </div>
                                 </a>
@@ -96,4 +93,18 @@
         <!-- End container -->
     </section>
     <!-- End section -->
+@endsection
+
+@section('custom-js')
+    <script>
+        const url = '{{ route('travel.list') }}';
+
+        $('#orderBy').change(function() {
+            var filter = this.value;
+            if (filter != undefined && filter != null) {
+                console.log(filter);
+                window.location = `${url}?filter=${filter}`;
+            }
+        });
+    </script>
 @endsection

@@ -77,7 +77,7 @@ $title = 'Wisata';
                                                     <td>{{ $row->name }}</td>
                                                     <td>{{ "{$row->start_date->format('d F Y')} - {$row->end_date->format('d F Y')}" }}</td>
                                                     <td>{{ $row->price_str }}</td>
-                                                    <td>{{ "{$row->fullfiled_quota}/{$row->quota}" }}</td>
+                                                    <td>{{ "{$row->fulfilled_quota}/{$row->quota}" }}</td>
                                                     <td>
                                                         <span
                                                             class="badge bg-{{ $row->status == 'Full' ? 'warning' : ($row->status == 'Available' ? 'success' : 'inverse') }}">{{ $row->status }}</span>

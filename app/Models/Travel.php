@@ -60,7 +60,7 @@ class Travel extends Model
 
     public function getIsQuotaNotFulfilledAttribute()
     {
-        return $this->getFullfiledQuotaAttribute() < $this->attributes['quota'];
+        return $this->getFulfilledQuotaAttribute() < $this->attributes['quota'];
     }
 
     public function getIsEditableAttribute()
@@ -68,7 +68,7 @@ class Travel extends Model
         return Auth::user()->role == 'pegawai' && $this->getIsAvailableAttribute() && $this->getIsQuotaNotFulfilledAttribute();
     }
 
-    public function getFullfiledQuotaAttribute()
+    public function getFulfilledQuotaAttribute()
     {
         return $this->orders()->where('is_accepted', 1)->get()->count();
     }

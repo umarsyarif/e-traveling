@@ -20,8 +20,8 @@ class TravelController extends Controller
     {
         $filter = $request->filter;
         $travels = Travel::when($filter == "available", function ($q) use ($filter) {
-            return $q->where('start_date', '>', date('Y-m-d'));
-        })
+                return $q->where('start_date', '>', date('Y-m-d'));
+            })
             ->when($filter == "closed", function ($q) use ($filter) {
                 return $q->where('start_date', '<', date('Y-m-d'));
             })
@@ -106,10 +106,20 @@ class TravelController extends Controller
 
     public function list(Request $request)
     {
-        $travels = Travel::latest()->paginate(9);
+        $filter = $request->filter ?? 'date';
+        $travels = Travel::where('start_date', '>', today())
+            ->when($filter == 'price', function ($q) {
+                return $q->orderBy('price');
+            })
+            ->when($filter == 'price-desc', function ($q) {
+                return $q->orderByDesc('price');
+            })
+            ->latest()
+            ->paginate(9);
 
         $data = [
-            'travels' => $travels
+            'travels' => $travels,
+            'filter' => $filter,
         ];
 
         return view('main.pages.travel-list', $data);
@@ -118,11 +128,16 @@ class TravelController extends Controller
     public function details(Travel $travel)
     {
         $isOrdered = optional(Auth::user())->isOrdered($travel->id);
+        $reviews = $travel->orders()->where('is_accepted', 1)->get()->filter(function($i) {
+            return $i->testimoni;
+        });
 
         $data = [
             'travel' => $travel,
+            'reviews' => $reviews,
             'isOrdered' => $isOrdered
         ];
+        // return $data;
 
         return view('main.pages.travel-details', $data);
     }

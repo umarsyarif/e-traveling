@@ -72,7 +72,7 @@ $title = $travel->name;
                                         </tr>
                                         <tr>
                                             <th scope="row">Kuota</th>
-                                            <td>: {{ "{$travel->fullfiled_quota}/{$travel->quota}" }}</td>
+                                            <td>: {{ "{$travel->fulfilled_quota}/{$travel->quota}" }}</td>
                                         </tr>
                                         </tbody>
                                     </table>

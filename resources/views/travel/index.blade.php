@@ -50,8 +50,10 @@ $title = 'Wisata';
                                         class="btn btn-inverse {{ Request::get('filter') != 'closed' ? 'btn-outline-inverse' : '' }} btn-sm waves-effect waves-light">Closed</a>
                                 </div>
                                 <div class="card-header-right">
-                                    <button type="button" class="btn btn-primary btn-sm waves-effect waves-light btn-create mr-2"
-                                        data-toggle="modal" data-target="#modal-wisata">+ Wisata</button>
+                                    @if (Auth::user()->role === 'pegawai')
+                                        <button type="button" class="btn btn-primary btn-sm waves-effect waves-light btn-create mr-2"
+                                            data-toggle="modal" data-target="#modal-wisata">+ Wisata</button>
+                                    @endif
                                 </div>
                             </div>
                             <div class="card-block">
@@ -83,14 +85,16 @@ $title = 'Wisata';
                                                     </td>
                                                     <td>
                                                         <a href="{{ route('travel.show', $row->id) }}"
-                                                            class="btn btn-sm btn-inverse px-2" data-toggle="tooltip"
+                                                            class="btn btn-sm btn-success px-2" data-toggle="tooltip"
                                                             data-placement="top" title=""
                                                             data-original-title="Check Orders">
                                                             <i class="feather icon-info mx-auto"></i>
                                                         </a>
-                                                        <button class="btn btn-sm btn-danger btn-delete px-2" data-id="{{ $row->id }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Hapus Wisata">
-                                                            <i class="feather icon-trash mx-auto"></i>
-                                                        </button>
+                                                        @if (Auth::user()->role === 'pegawai')
+                                                            <button class="btn btn-sm btn-danger btn-delete px-2" data-id="{{ $row->id }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Hapus Wisata">
+                                                                <i class="feather icon-trash mx-auto"></i>
+                                                            </button>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach

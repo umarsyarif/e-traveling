@@ -6,8 +6,8 @@ $title = $travel->name;
 
 @push('styles')
     <!-- Data Table Css -->
-    <link rel="stylesheet" type="text/css"
-        href="{{ asset('adminty\bower_components\datatables.net-bs4\css\dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('adminty\bower_components\datatables.net-bs4\css\dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('adminty\bower_components\datatables.net-buttons\css\buttons.dataTables.min.css') }}">
 @endpush
 
 @section('content')
@@ -84,7 +84,9 @@ $title = $travel->name;
                                         </span>
                                     </div>
                                 </div>
-                                <button id="btn-edit-travel" class="btn btn-warning btn-sm waves-effect waves-light float-right mt-2">Edit</button>
+                                @if (Auth::user()->role === 'pegawai')
+                                    <button id="btn-edit-travel" class="btn btn-warning btn-sm waves-effect waves-light float-right mt-2">Edit</button>
+                                @endif
                             </div>
                             <div class="card-block d-none" id="show-card">
                                 <form action="{{ route('travel.update', ['travel' => $travel->id]) }}" method="post" enctype="multipart/form-data">
@@ -162,7 +164,9 @@ $title = $travel->name;
                                                 <th>Nama</th>
                                                 <th>Tanggal</th>
                                                 <th>Status</th>
-                                                <th>Actions</th>
+                                                @if (Auth::user()->role === 'pegawai')
+                                                    <th>Actions</th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -175,15 +179,19 @@ $title = $travel->name;
                                                         <span
                                                             class="badge bg-{{ !$row->is_accepted ? 'warning' : 'success' }}">{{ $row->status }}</span>
                                                     </td>
-                                                    <td>
-                                                        <button class="btn btn-sm btn-inverse btn-update-order px-2"
-                                                            data-id="{{ $row->id }}"
-                                                            data-toggle="tooltip"
-                                                            data-placement="top"
-                                                            data-original-title="Accept Order">
-                                                            <i class="feather icon-info mx-auto"></i>
-                                                        </button>
-                                                    </td>
+                                                    @if (Auth::user()->role === 'pegawai')
+                                                        <td>
+                                                            @if ($travel->status == 'Available')
+                                                                <button class="btn btn-sm btn-inverse btn-update-order px-2"
+                                                                    data-id="{{ $row->id }}"
+                                                                    data-toggle="tooltip"
+                                                                    data-placement="top"
+                                                                    data-original-title="Accept Order">
+                                                                    <i class="feather icon-info mx-auto"></i>
+                                                                </button>
+                                                            @endif
+                                                        </td>
+                                                    @endif
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -193,7 +201,9 @@ $title = $travel->name;
                                                 <th>Nama</th>
                                                 <th>Tanggal</th>
                                                 <th>Status</th>
-                                                <th>Actions</th>
+                                                @if (Auth::user()->role === 'pegawai')
+                                                    <th>Actions</th>
+                                                @endif
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -238,6 +248,10 @@ $title = $travel->name;
     <!-- data-table js -->
     <script src="{{ asset('adminty\bower_components\datatables.net\js\jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('adminty\bower_components\datatables.net-bs4\js\dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('adminty\bower_components\datatables.net-buttons\js\dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('adminty\bower_components\datatables.net-buttons\js\buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('adminty\bower_components\datatables.net-buttons\js\pdfmake.min.js') }}"></script>
+    <script src="{{ asset('adminty\bower_components\datatables.net-buttons\js\vfs_fonts.js') }}"></script>
     <!-- form-mask js -->
     <script src="{{ asset('adminty/assets/pages/form-masking/autoNumeric.js') }}"></script>
     <script src="{{ asset('adminty/assets/pages/form-masking/form-mask.js') }}"></script>
@@ -249,8 +263,14 @@ $title = $travel->name;
         const csrf = '{{ csrf_token() }}';
 
         $(document).ready(function() {
-            $('#simpletable').DataTable();
+            $('#simpletable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    {extend:'pdfHtml5',exportOptions:{columns:[0,1,2,3]}}
+                ]
+            });
         });
+
 
         $('#btn-edit-travel').click(function () {
             $('#show-card').toggleClass('d-none');

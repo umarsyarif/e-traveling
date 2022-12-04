@@ -9,35 +9,29 @@
                 </a>
             </li>
             {{-- Karyawan --}}
-            {{-- @if (Auth::user()->role == 'pegawai') --}}
+            @if (Auth::user()->role == 'pegawai' || Auth::user()->role == 'admin')
             <li class="{{ Request::is('travel') ? 'active' : '' }}">
                 <a href="{{ route('travel.index') }}">
-                    <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
+                    <span class="pcoded-micon"><i class="feather icon-map-pin"></i></span>
                     <span class="pcoded-mtext">Wisata</span>
                 </a>
             </li>
-            {{-- @endif --}}
+            @endif
             {{-- Admin --}}
-            {{-- @if (Auth::user()->role == 'admin') --}}
+            @if (Auth::user()->role == 'admin')
             <li class="{{ Request::is('order') ? 'active' : '' }}">
                 <a href="{{ route('order.index') }}">
                     <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
-                    <span class="pcoded-mtext">Pesanan</span>
+                    <span class="pcoded-mtext">Laporan Pemesanan</span>
                 </a>
             </li>
             <li class="{{ Request::is('karyawan') ? 'active' : '' }}">
                 <a href="{{ route('employee.index') }}">
-                    <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
+                    <span class="pcoded-micon"><i class="feather icon-users"></i></span>
                     <span class="pcoded-mtext">Karyawan</span>
                 </a>
             </li>
-            <li class="{{ Request::is('laporan') ? 'active' : '' }}">
-                <a href="{{ route('report.index') }}">
-                    <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
-                    <span class="pcoded-mtext">Laporan</span>
-                </a>
-            </li>
-            {{-- @endif --}}
+            @endif
         </ul>
     </div>
 </nav>

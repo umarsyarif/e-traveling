@@ -99,16 +99,13 @@
                                     <a href="{{ route('travel.list') }}" class="show-submenu">Wisata</a>
                                 </li>
                                 @auth
-                                    <li class="submenu">
-                                        <a href="{{ route('order.history') }}" class="show-submenu">Riwayat Order</a>
-                                    </li>
                                     @if (Auth::user()->role == 'admin' || Auth::user()->role == 'pegawai')
                                         <li>
                                             <a href="{{ route('dashboard') }}">Dashboard</a>
                                         </li>
                                     @else
                                         <li class="submenu">
-                                            <a href="{{ route('order.list') }}" class="show-submenu">Orders</a>
+                                            <a href="{{ route('order.history') }}" class="show-submenu">Riwayat Order</a>
                                         </li>
                                     @endif
                                     <li>

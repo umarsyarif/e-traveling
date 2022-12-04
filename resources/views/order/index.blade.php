@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 <?php
-$title = 'Laporan Transaksi';
+$title = 'Laporan Pemesanan';
 ?>
 @section('title', $title)
 
@@ -42,49 +42,44 @@ $title = 'Laporan Transaksi';
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <div class="row pl-3">
-                                    <div class="col-5">
-                                        <div class="row">
-                                            <span>Tgl. Disetujui: &nbsp;</span>
-                                            <div id="acceptedDate"
-                                                style="background: #fff; cursor: pointer; padding: 0px 5px 5px 5px; border: 1px solid #ccc;">
-                                                <span class="acceptedDateText">Semua</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="row">
-                                            <span>Tgl. Dibuat: &nbsp;</span>
+                                <div class="row">
+                                    <div class="col-10 row">
+                                        <div class="col-sm-4">
+                                            <label>Tanggal Pemesanan: &nbsp;</label>
                                             <div id="createdDate"
-                                                style="background: #fff; cursor: pointer; padding: 0px 5px 5px 5px; border: 1px solid #ccc;">
-                                                <span class="createdDateText">Semua</span>
+                                                style="background: #fff; cursor: pointer; padding: 0px 5px 5px 5px;">
+                                                <span class="createdDateText form-control">Semua</span>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="col-3">
-                                        <div class="row">
-                                            <form action="{{ route('report.index') }}" method="get">
-                                                <input type="hidden" name="acceptedDateStart" class="acceptedDateStart">
-                                                <input type="hidden" name="acceptedDateEnd" class="acceptedDateEnd">
-                                                <input type="hidden" name="createdDateStart" class="createdDateStart">
-                                                <input type="hidden" name="createdDateEnd" class="createdDateEnd">
-                                                <button type="submit"
-                                                    class="btn btn-primary btn-sm waves-effect waves-light btn-create mr-2">Filter</button>
-
-                                            </form>
-                                            <button id="filterReset"
-                                                class="btn btn-warning btn-sm waves-effect waves-light btn-create mr-2">Reset</button>
-                                            <form action="{{ route('report.orderPDF') }}" method="get">
-                                                <input type="hidden" name="acceptedDateStart" class="acceptedDateStart">
-                                                <input type="hidden" name="acceptedDateEnd" class="acceptedDateEnd">
-                                                <input type="hidden" name="createdDateStart" class="createdDateStart">
-                                                <input type="hidden" name="createdDateEnd" class="createdDateEnd">
-                                                <button type="submit"
-                                                    class="btn btn-success btn-sm waves-effect waves-light btn-create mr-2">Export
-                                                    PDF</button>
-
+                                        <div class="col-sm-4">
+                                            <label>Tanggal Disetujui: &nbsp;</label>
+                                            <div id="acceptedDate"
+                                                style="background: #fff; cursor: pointer; padding: 0px 5px 5px 5px;">
+                                                <span class="acceptedDateText form-control">Semua</span>
+                                            </div>
                                         </div>
+                                        <div class="col-2 d-flex align-items-end pb-2">
+                                                <button id="filterReset"
+                                                class="btn btn-warning btn-sm waves-effect waves-light btn-create mr-2">Reset</button>
+                                                <form action="{{ route('order.index') }}" method="get">
+                                                    <input type="hidden" name="acceptedDateStart" class="acceptedDateStart">
+                                                    <input type="hidden" name="acceptedDateEnd" class="acceptedDateEnd">
+                                                    <input type="hidden" name="createdDateStart" class="createdDateStart">
+                                                    <input type="hidden" name="createdDateEnd" class="createdDateEnd">
+                                                    <button type="submit"
+                                                        class="btn btn-primary btn-sm waves-effect waves-light btn-create mr-2">Filter</button>
+                                                </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-2 d-flex justify-content-end align-items-end pb-2">
+                                        <form action="{{ route('order.orderPDF') }}" method="get">
+                                            <input type="hidden" name="acceptedDateStart" class="acceptedDateStart">
+                                            <input type="hidden" name="acceptedDateEnd" class="acceptedDateEnd">
+                                            <input type="hidden" name="createdDateStart" class="createdDateStart">
+                                            <input type="hidden" name="createdDateEnd" class="createdDateEnd">
+                                            <button type="submit"
+                                                class="btn btn-success btn-sm waves-effect waves-light btn-create mr-2">Export
+                                                PDF</button>
                                     </div>
                                 </div>
 
@@ -95,8 +90,10 @@ $title = 'Laporan Transaksi';
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Wisata</th>
-                                                <th>Kustomer</th>
+                                                <th>Nama Wisata</th>
+                                                <th>Nama Customer</th>
+                                                <th>Tanggal Pemesanan</th>
+                                                <th>Tanggal Disetujui</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -105,14 +102,18 @@ $title = 'Laporan Transaksi';
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $order->travel->name }}</td>
                                                     <td>{{ $order->user->name }}</td>
+                                                    <td>{{ $order->created_at->format('d F Y H:i') }}</td>
+                                                    <td>{{ $order->accepted_at?->format('d F Y H:i') ?? "-" }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
                                         <tfoot>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Wisata</th>
-                                                <th>Kustomer</th>
+                                                <th>Nama Wisata</th>
+                                                <th>Nama Customer</th>
+                                                <th>Tanggal Pemesanan</th>
+                                                <th>Tanggal Disetujui</th>
                                             </tr>
                                         </tfoot>
                                     </table>

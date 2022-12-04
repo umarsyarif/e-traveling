@@ -42,22 +42,12 @@ Route::prefix('order')->name('order.')->group(function () {
     // Admin
     Route::get('/', [App\Http\Controllers\OrderController::class, 'index'])->name('index');
     Route::put('/{order}', [App\Http\Controllers\OrderController::class, 'update'])->name('update');
+    Route::get('/order-pdf', [App\Http\Controllers\OrderController::class, 'orderPDF'])->name('orderPDF');
 });
-
-// Route::prefix('user')->name('user.')->group(function () {
-//     // Admin
-//     Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('index');
-// });
 
 Route::prefix('karyawan')->name('employee.')->group(function () {
     // Admin
     Route::get('/', [App\Http\Controllers\EmployeeController::class, 'index'])->name('index');
     Route::post('/', [App\Http\Controllers\EmployeeController::class, 'store'])->name('store');
     Route::delete('/{employee}', [App\Http\Controllers\EmployeeController::class, 'destroy'])->name('destroy');
-});
-
-Route::prefix('laporan')->name('report.')->group(function () {
-    // Admin
-    Route::get('/', [App\Http\Controllers\ReportController::class, 'index'])->name('index');
-    Route::get('/order-pdf', [App\Http\Controllers\ReportController::class, 'orderPDF'])->name('orderPDF');
 });

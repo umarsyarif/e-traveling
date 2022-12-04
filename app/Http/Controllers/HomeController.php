@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\Travel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,6 +32,38 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        return view('admin.dashboard');
+        $incomingTravels = Travel::where('start_date', '>', today())->limit(5)->get();
+
+        $newOrders = Order::whereHas('travel', function($q){
+            $q->where('start_date', '>', today());
+        })->whereNull('accepted_at')->get();
+
+        $statistic = [
+            [
+                'title' => 'Customer Terdaftar',
+                'count' => User::where('role', 'customer')->count()
+            ],
+            [
+                'title' => 'Destinasi Wisata',
+                'count' => Travel::count()],
+            [
+                'title' => 'Pesanan Selesai',
+                'count' => Order::whereHas('travel', function($q){
+                    $q->where('start_date', '<=', today());
+                })->whereNotNull('accepted_at')->count()
+            ],
+            [
+                'title' => 'Pesanan Baru',
+                'count' => $newOrders->count()
+            ],
+        ];
+
+
+        $data = [
+            'statistic' => $statistic,
+            'newOrders' => $newOrders,
+            'incomingTravels' => $incomingTravels
+        ];
+        return view('admin.dashboard', $data);
     }
 }

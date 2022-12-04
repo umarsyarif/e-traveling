@@ -106,7 +106,7 @@ class TravelController extends Controller
 
     public function list(Request $request)
     {
-        $travels = Travel::paginate(9);
+        $travels = Travel::latest()->paginate(9);
 
         $data = [
             'travels' => $travels

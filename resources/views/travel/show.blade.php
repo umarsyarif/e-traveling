@@ -271,7 +271,7 @@ $title = $travel->name;
             $('#simpletable').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
-                    {extend:'pdfHtml5',exportOptions:{columns:[0,1,2,3]}}
+                    {extend:'pdfHtml5',exportOptions:{columns:[0,1,2,3]},className:'btn btn-sm btn-primary', text:'Download'}
                 ]
             });
         });

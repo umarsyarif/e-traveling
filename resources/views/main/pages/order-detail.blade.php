@@ -22,90 +22,65 @@
                 <div class="col-md-8">
 
                     <div class="owl-carousel owl-theme carousel_detail add_bottom_15">
-                        <div class="item"><img src="{{ asset($order->travel->img) }}" style="object-fit: cover"
+                        {{-- <div class="item"><img src="{{ asset($order->travel->img) }}" style="object-fit: cover"
                                 alt="">
-                        </div>
+                        </div> --}}
                         {{-- <div class="item"><img src="{{ asset('main/img/carousel/carousel_in_2.jpg') }}" alt="">
                         </div>
                         <div class="item"><img src="{{ asset('main/img/carousel/carousel_in_3.jpg') }}" alt="">
                         </div> --}}
                     </div>
 
-                    <ul class="nav nav-tabs">
+                    {{-- <ul class="nav nav-tabs">
                         <li class="active"><a href="#tab_1" data-toggle="tab">Overview</a>
                         </li>
                         <li><a href="#tab_2" data-toggle="tab">Reviews</a>
                         </li>
                         <li><a href="#tab_3" data-toggle="tab">Map</a>
                         </li>
-                    </ul>
+                    </ul> --}}
 
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="tab_1">
-
-                            <p>
-                                {!! $order->travel->description !!}
-                            </p>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="feature-box">
-                                        <div class="feature-box-icon">
-                                            <i class="icon-ok-4"></i>
-                                        </div>
-                                        <div class="feature-box-info">
-                                            <h4>Invenire voluptatum</h4>
-                                            <p>
-                                                Lorem ipsum dolor sit amet, ei per elitr persecuti adipiscing, ne discere
-                                                temporibus nam.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="feature-box">
-                                        <div class="feature-box-icon">
-                                            <i class="icon-ok-4"></i>
-                                        </div>
-                                        <div class="feature-box-info">
-                                            <h4>Nec ludus repudiare</h4>
-                                            <p>
-                                                Lorem ipsum dolor sit amet, ei per elitr persecuti adipiscing, ne discere
-                                                temporibus nam.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End col -->
-
-                                <div class="col-md-6">
-                                    <div class="feature-box">
-                                        <div class="feature-box-icon">
-                                            <i class="icon-ok-4"></i>
-                                        </div>
-                                        <div class="feature-box-info">
-                                            <h4>Vix agam fabellas</h4>
-                                            <p>
-                                                Lorem ipsum dolor sit amet, ei per elitr persecuti adipiscing, ne discere
-                                                temporibus nam.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="feature-box">
-                                        <div class="feature-box-icon">
-                                            <i class="icon-ok-4"></i>
-                                        </div>
-                                        <div class="feature-box-info">
-                                            <h4>Sea laoreet pericula</h4>
-                                            <p>
-                                                Lorem ipsum dolor sit amet, ei per elitr persecuti adipiscing, ne discere
-                                                temporibus nam.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End col -->
-                            </div>
+                            <table class="table">
+								<tbody>
+									<tr>
+										<td>Nama Wisata</td>
+										<td>{{ $order->travel->name }}</td>
+									</tr>
+									<tr>
+										<td>Tanggal Pelaksanaan</td>
+										<td>{{ "{$order->travel->start_date->format('d F Y')} - {$order->travel->end_date->format('d F Y')}" }}</td>
+									</tr>
+									<tr>
+										<td>Tanggal Pemesanan</td>
+										<td>{{ $order->created_at->format('d F Y H:i:s') }}</td>
+									</tr>
+									<tr>
+                                        <td>Harga</td>
+										<td>{{ $order->travel->price_str }}</td>
+									</tr>
+                                    <tr>
+                                        <td>Status Pemesanan</td>
+                                        <td>{{ $order->status }}</td>
+                                    </tr>
+								</tbody>
+							</table>
                             <!-- End row -->
 
                             <hr>
+
+                            <div class="card text-center">
+                                <h5>ID PEMESANAN</h5>
+                                <span style="display: flex;justify-content: center;align-items: center; gap: 2px">
+                                    <h4 id="order-id">{{ "#{$order->order_code}" }}</h4><a id="copy-id" href="javascript:void(0)" class="fs1 tooltip-1" aria-hidden="true" data-icon="i" data-placement="top" title data-original-title="Copy"></a>
+                                </span>
+                                @if (!$order->is_accepted)
+                                    <p>Silahkan bawa dan tunjukkan ID Pemesanan pada saat pembayaran</p>
+                                @else
+                                    <p>Pesanan telah diterima, anda telah terdaftar pada wisata ini</p>
+                                @endif
+                            </div>
 
                         </div>
                         <!-- End tab_1 -->
@@ -304,142 +279,16 @@
                         </ul>
                     </div>
                     <div class="box_style_2">
-                        <h3>Book Your Tour<span>Free service - Confirmed immediately</span></h3>
-                        <div id="message-booking"></div>
                         @auth
-                            @if (true)
-                                <a href=""><button class="btn_full">Riwayat Order</button></a>
+                            @if (!$order->travel->is_available && !$order->testimoni)
+                                <a href="{{ route('travel.details', ['travel' => $order->travel_id]) }}"><button class="btn_full">Beri Testimoni</button></a>
                             @else
-                                <form method="post" action="{{ route('order.store', ['travel' => $order->travel->id]) }}">
-                                    @csrf
-                                    <input type="hidden" id="travel_id" name="travel_id" value="{{ $order->travel->id }}">
-                                    {{-- <table id="tickets" class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Tickets</th>
-
-                                            <th>Quantity</th>
-                                            <th class="text-center"><span class="subtotal">Subtotal</span>
-
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr class="total_row">
-                                            <td colspan="2"><strong>TOTAL</strong>
-                                            </td>
-                                            <td class="text-center">
-                                                <input name="total" id="total" value="">
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>Adult</strong><a href="#" class="tooltip-1" data-placement="top" title="" data-original-title="16 - 65 years old"><sup class="icon-info-4"></sup></a>
-                                                <span class="price">$8.25</span>
-                                            </td>
-                                            <td>
-                                                <div class="styled-select">
-                                                    <select class="form-control" name="adults" id="adults">
-                                                        <option value="">Select</option>
-                                                        <option value="0">0</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                        <option value="6">6</option>
-                                                        <option value="7">7</option>
-                                                        <option value="8">8</option>
-                                                        <option value="9">9</option>
-                                                    </select>
-                                                </div>
-                                            </td>
-                                            <td class="text-center"><span class="subtotal">$0</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Senior</strong><a href="#" class="tooltip-1" data-placement="top" title="" data-original-title="Over 65 years old"><sup class="icon-info-4"></sup></a><span class="price">$6.75</span>
-                                            </td>
-                                            <td>
-                                                <div class="styled-select">
-                                                    <select class="form-control" name="senior" id="senior">
-                                                        <option value="">Select</option>
-                                                        <option value="0">0</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                        <option value="6">6</option>
-                                                        <option value="7">7</option>
-                                                        <option value="8">8</option>
-                                                        <option value="9">9</option>
-                                                    </select>
-                                                </div>
-                                            </td>
-                                            <td class="text-center"><span class="subtotal">$0</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Student</strong> <span class="price">$6.75</span> </td>
-                                            <td>
-                                                <div class="styled-select">
-                                                    <select class="form-control" name="student" id="student">
-                                                        <option value="">Select</option>
-                                                        <option value="0">0</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                        <option value="6">6</option>
-                                                        <option value="7">7</option>
-                                                        <option value="8">8</option>
-                                                        <option value="9">9</option>
-                                                    </select>
-                                                </div>
-                                            </td>
-                                            <td class="text-center"><span class="subtotal">$0</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                                <div class="form-group">
-                                    <label>When?</label>
-                                    <input type="text" class="form-control" id="date_pick" name="date_pick" data-date-format="M d, D" placeholder="Select a date">
-                                </div>
-                                <div class="form-group">
-                                    <label>Name and Lastname</label>
-                                    <input type="text" class="form-control" id="name_lastname_booking" name="name_lastname_booking" placeholder="Name and Lastname">
-                                </div>
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="email" class="form-control" id="email_booking" name="email_booking" placeholder="Email">
-                                </div>
-                                <div class="form-group">
-                                    <label>Telephone</label>
-                                    <input type="text" class="form-control" id="telephone_booking" name="telephone_booking" placeholder="Telephone">
-                                </div>
-                                <div class="form-group add_bottom_30">
-                                    <label>Are you human? 3 + 1 =</label>
-                                    <input type="text" id="verify_booking" class=" form-control" placeholder="Are you human? 3 + 1 =">
-                                </div> --}}
-                                    <div class="form-group">
-                                        <input type="submit" value="Book now" class="btn_full" id="submit-booking"
-                                            {{ $isOrdered ? 'disabled' : '' }}>
-                                    </div>
-
-                                </form>
+                                <a href="{{ route('travel.details', ['travel' => $order->travel_id]) }}"><button class="btn_full">Lihat Detail Wisata</button></a>
                             @endif
                         @endauth
                         @guest
                             <button type="button" class="btn_full login-button">Login to book</button>
                         @endguest
-                        <hr>
-                        <a href="#0" class="btn_outline"> or Contact us</a>
-                        <a href="tel://004542344599" id="phone_2"><i class="icon_set_1_icon-91"></i>+45 423 445 99</a>
 
                     </div>
                 </aside>
@@ -452,6 +301,14 @@
 @endsection
 @section('import-js')
     <!-- SPECIFIC SCRIPTS -->
-
     <script src="{{ asset('main/js/sidebar_carousel_detail_page_func.js') }}"></script>
+    <script>
+        $('#copy-id').click(function() {
+            // Get the text field
+            var copyText = $("#order-id").text();
+
+            // Copy the text inside the text field
+            navigator.clipboard.writeText(copyText.text);
+        })
+    </script>
 @endsection

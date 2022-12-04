@@ -108,12 +108,10 @@ class OrderController extends Controller
 
     public function orderDetail(Order $order)
     {
-        $order = $order->with(['user', 'travel'])->first();
-
         $data = [
             'order' => $order
         ];
-
+        // return $data;
         return view('main.pages.order-detail', $data);
     }
 

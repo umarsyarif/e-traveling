@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTravelRequest;
 use App\Http\Requests\UpdateTravelRequest;
+use App\Models\Order;
 use App\Models\Travel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -128,6 +129,7 @@ class TravelController extends Controller
     public function details(Travel $travel)
     {
         $isOrdered = optional(Auth::user())->isOrdered($travel->id);
+        $order = $isOrdered ? $travel->orders()->where('user_id', Auth::id())->first() : null;
         $reviews = $travel->orders()->where('is_accepted', 1)->get()->filter(function($i) {
             return $i->testimoni;
         });
@@ -135,9 +137,9 @@ class TravelController extends Controller
         $data = [
             'travel' => $travel,
             'reviews' => $reviews,
-            'isOrdered' => $isOrdered
+            'isOrdered' => $isOrdered,
+            'order' => $order
         ];
-        // return $data;
 
         return view('main.pages.travel-details', $data);
     }

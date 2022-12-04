@@ -180,7 +180,7 @@ $title = $travel->name;
                                                     </td>
                                                     @if ($travel->is_editable)
                                                         <td>
-                                                            @if ($travel->status == 'Available' && !$row->accepted_at)
+                                                            @if ($travel->status == 'Available' && !$row->is_accepted)
                                                                 <button class="btn btn-sm btn-primary btn-update-order px-2"
                                                                     data-id="{{ $row->id }}"
                                                                     data-toggle="tooltip"
@@ -270,7 +270,7 @@ $title = $travel->name;
             $('#simpletable').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
-                    {extend:'pdfHtml5',exportOptions:{columns:[0,1,2,3]},className:'btn btn-sm btn-primary', text:'Download'}
+                    {extend:'pdfHtml5',exportOptions:{columns:[0,1,2,3]},className:'btn btn-sm btn-inverse', text:'Download'}
                 ]
             });
         });

@@ -10,7 +10,6 @@
     <link rel="icon" href="{{ asset('adminty\assets\images\favicon.ico') }}" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
-    @stack('styles')
     <!-- Required Fremwork -->
     <link rel="stylesheet" type="text/css" href="{{ asset('adminty\bower_components\bootstrap\css\bootstrap.min.css') }}">
     <!-- themify-icons line icon -->
@@ -21,9 +20,12 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('adminty\assets\pages\notification\notification.css') }}">
     <!-- feather Awesome -->
     <link rel="stylesheet" type="text/css" href="{{ asset('adminty\assets\icon\feather\css\feather.css') }}">
+    <!-- Datatable buttons -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('adminty\bower_components\datatables.net-buttons\css\buttons.dataTables.min.css') }}">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('adminty\assets\css\style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('adminty\assets\css\jquery.mCustomScrollbar.css') }}">
+    @stack('styles')
 </head>
 <!-- Menu sidebar static layout -->
 

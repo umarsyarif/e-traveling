@@ -17,7 +17,15 @@
 
     <section class="wrapper">
         <div class="divider_border_gray"></div>
+
         <div id="filters" class="clearfix">
+            <div id="sort_filters">
+                <select id="orderBy" name="orderby" class="selectbox">
+                    <option value="terbaru" {{ $filter == 'terbaru' ? 'selected' : '' }}>Terbaru</option>
+                    <option value="terlama" {{ $filter == 'terlama' ? 'selected' : '' }}>Terlama
+                    </option>
+                </select>
+            </div>
             <div id="view_change">
                 <a href="{{ route('travel.list') }}"><strong>PESAN BARU</strong></a>
             </div>
@@ -27,11 +35,6 @@
 
 
         <div class="container">
-            @if (session()->has('success'))
-                <div class="alert alert-success" role="alert">
-                    {{ session()->get('success') }}
-                </div>
-            @endif
             @foreach ($orders as $order)
                 <div class="row strip_list wow fadeIn animated" data-wow-delay="0.2s">
                     <div class="col-md-3" style="padding-top: 20px">
@@ -52,67 +55,36 @@
                         <h3>{{ $order->travel->name }}</h3>
                         <p>{{ $order->travel->description }}</p>
                         </p>
-                        @empty(!$order->testimoni)
-                            <p><strong>Testimoni anda:</strong> <em>{{ $order->testimoni }}</em></p>
-                        @endempty
                         <p><a href="{{ route('order.orderDetail', ['order' => $order->id]) }}"><button class="btn_1">Detail
                                     Order</button></a>
-                            @if ($order->testimoni == null && $order->is_accepted == 1)
-                                <button class="btn_1" data-toggle="modal" data-target="#testimonialModal"
-                                    data-id="{{ $order->id }}">Beri Testimoni</button>
-                            @endempty
-                    </p>
+                        </p>
+                    </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
 
-        <nav class="pagination-wrapper">
-            <ul class="pagination">
-                {{ $orders->links() }}
-            </ul>
-        </nav>
-        <!-- End pagination -->
+            <nav class="pagination-wrapper">
+                <ul class="pagination">
+                    {{ $orders->links() }}
+                </ul>
+            </nav>
+            <!-- End pagination -->
 
-    </div>
-    <!-- End container -->
-</section>
-<!-- End section -->
-{{-- Testimoni Modal --}}
-<div class="modal fade" id="testimonialModal" tabindex="-1" role="dialog" aria-labelledby="testimonialModalLabel"
-    aria-hidden="true" style="padding-top: 10rem">
-    <div class="modal-dialog-centered modal-dialog" style="width: 400px;" role="document">
-        <div class="box_style_2 pb-5">
-            <form method="POST" action="{{ route('order.testimonialUpdate') }}" autocomplete="off">
-                @csrf
-                <input type="hidden" name="id">
-                <div class="form-group">
-                    {{-- <label>Password</label> --}}
-                    <textarea class="form-control" style="resize:vertical" id="testimoni" name="testimoni" placeholder="Testimoni anda..."></textarea>
-                </div>
-
-                <div class="form-group">
-                    <button type="submit" class="btn_full" id="testimonial-button">Simpan</button>
-                </div>
-            </form>
         </div>
-    </div>
-</div>
+        <!-- End container -->
+    </section>
+    <!-- End section -->
 @endsection
+
 @section('custom-js')
-<script>
-    $('#testimonialModal').on('show.bs.modal', function(e) {
+    <script>
+        const url = '{{ route('order.history') }}';
 
-        //get data-id attribute of the clicked element
-        var id = $(e.relatedTarget).data('id');
-
-        //populate the textbox
-        $(e.currentTarget).find('input[name="id"]').val(id);
-
-    });
-    $(document).ready(function() {
-        setTimeout(function() {
-            $(".alert").alert('close');
-        }, 3000);
-    });
-</script>
+        $('#orderBy').change(function() {
+            var filter = this.value;
+            if (filter != undefined && filter != null) {
+                console.log(filter);
+                window.location = `${url}?filter=${filter}`;
+            }
+        });
+    </script>
 @endsection

@@ -30,7 +30,8 @@
                                 </tr>
                                 <tr>
                                     <td>Tanggal Pelaksanaan</td>
-                                    <td>{{ "{$order->travel->start_date->format('d F Y')} - {$order->travel->end_date->format('d F Y')}" }}</td>
+                                    <td>{{ "{$order->travel->start_date->format('d F Y')} - {$order->travel->end_date->format('d F Y')}" }}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Tanggal Pemesanan</td>
@@ -53,7 +54,9 @@
                         <div class="card text-center">
                             <h5>ID PEMESANAN</h5>
                             <span style="display: flex;justify-content: center;align-items: center; gap: 2px">
-                                <h4 id="order-id">{{ "#{$order->order_code}" }}</h4><a id="copy-id" href="javascript:void(0)" class="fs1 tooltip-1" aria-hidden="true" data-icon="i" data-placement="top" title data-original-title="Copy"></a>
+                                <h4 id="order-id">{{ "#{$order->order_code}" }}</h4><a id="copy-id"
+                                    href="javascript:void(0)" class="fs1 tooltip-1" aria-hidden="true" data-icon="i"
+                                    data-placement="top" title data-original-title="Copy"></a>
                             </span>
                             @if (!$order->is_accepted)
                                 <p>Silahkan bawa dan tunjukkan ID Pemesanan pada saat pembayaran</p>
@@ -82,9 +85,11 @@
                     <div class="box_style_2">
                         @auth
                             @if (!$order->travel->is_available && !$order->testimoni)
-                                <a href="{{ route('travel.details', ['travel' => $order->travel_id]) }}"><button class="btn_full">Beri Testimoni</button></a>
+                                <a href="{{ route('travel.details', ['travel' => $order->travel_id, 'to' => 'review']) }}"><button
+                                        class="btn_full">Beri Testimoni</button></a>
                             @else
-                                <a href="{{ route('travel.details', ['travel' => $order->travel_id]) }}"><button class="btn_full">Lihat Detail Wisata</button></a>
+                                <a href="{{ route('travel.details', ['travel' => $order->travel_id]) }}"><button
+                                        class="btn_full">Lihat Detail Wisata</button></a>
                             @endif
                         @endauth
                         @guest

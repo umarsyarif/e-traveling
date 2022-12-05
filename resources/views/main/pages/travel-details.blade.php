@@ -18,7 +18,7 @@
         <div class="divider_border"></div>
 
         <div class="container">
-            <div class="row">
+            <div class="row scroll-target">
                 <div class="col-md-8">
 
                     <div class="owl-carousel owl-theme carousel_detail add_bottom_15">
@@ -31,11 +31,11 @@
                     </div>
 
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#tab_1" data-toggle="tab">Overview</a>
+                        <li class="nab-tab-li-1 active"><a href="#tab_1" data-toggle="tab">Overview</a>
                         </li>
-                        <li><a href="#tab_2" data-toggle="tab">Reviews</a>
+                        <li class="nab-tab-li-2"><a href="#tab_2" data-toggle="tab">Reviews</a>
                         </li>
-                        <li><a href="#tab_3" data-toggle="tab">Map</a>
+                        <li class="nab-tab-li-3"><a href="#tab_3" data-toggle="tab">Map</a>
                         </li>
                     </ul>
 
@@ -126,20 +126,22 @@
                             <div class="reviews-container">
                                 @foreach ($reviews as $item)
                                     <div class="review-box clearfix">
-                                        <figure class="rev-thumb"><img src="{{ asset('main/img/avatar1.jpg') }}" alt="">
+                                        <figure class="rev-thumb"><img src="{{ asset('main/img/avatar1.jpg') }}"
+                                                alt="">
                                         </figure>
                                         <div class="rev-content">
                                             <div class="rating">
                                                 <i class="icon-star voted"></i><i class="icon-star voted"></i><i
-                                                class="icon-star voted"></i><i class="icon-star voted"></i><i
-                                                class="icon-star-empty"></i>
+                                                    class="icon-star voted"></i><i class="icon-star voted"></i><i
+                                                    class="icon-star-empty"></i>
                                             </div>
                                             <div class="rev-info">
-                                                {{$item->user->name == Auth::user()->name ? 'You' : $item->user->name}} – {{$item->updated_at->format('d F Y H:i')}}
+                                                {{ $item->user->name == Auth::user()->name ? 'You' : $item->user->name }} –
+                                                {{ $item->updated_at->format('d F Y H:i') }}
                                             </div>
                                             <div class="rev-text">
                                                 <p>
-                                                    {{$item->testimoni}}
+                                                    {{ $item->testimoni }}
                                                 </p>
                                             </div>
                                         </div>
@@ -156,22 +158,17 @@
                             @if ($isOrdered && !$reviews->pluck('user.name')->contains(Auth::user()->name))
                                 <div class="add-review">
                                     <h4>Leave a Review</h4>
-                                    <div id="message-review"></div>
-                                    <form method="post" action="assets/review.php" id="review" autocomplete="off">
-                                        <input type="hidden" id="tour_name_review" name="tour_name_review"
-                                            value="General Louvre Tour">
+                                    <form method="post" action="{{ route('order.testimonialUpdate') }}"
+                                        autocomplete="off">
+                                        @csrf
+                                        <input type="hidden" id="id" name="id" value="{{ $order->id }}">
                                         <div class="row">
                                             <div class="form-group col-md-12">
                                                 <label>Your Review</label>
-                                                <textarea name="review_text" id="review_text" class="form-control" style="height:130px;"></textarea>
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label>Are you human? 3 + 1 =</label>
-                                                <input type="text" id="verify_review" class=" form-control"
-                                                    placeholder="Are you human? 3 + 1 =">
+                                                <textarea name="testimoni" id="testimoni" class="form-control" style="height:130px;"></textarea>
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <input type="submit" value="Submit" class="btn_1" id="submit-review">
+                                                <input type="submit" value="Submit" class="btn_1">
                                             </div>
                                         </div>
                                     </form>
@@ -220,7 +217,8 @@
                 <aside class="col-md-4">
                     <div class="box_style_1">
                         <div class="price">
-                            <strong>{{ $travel->price_str }}</strong><small>per person</small>
+                            <strong style="font-size: 3rem">{{ $travel->price_str }}</strong><br><span
+                                style="font-size: 1.5rem">per person</span>
                         </div>
                         <ul class="list_ok">
                             <li>Tiket Pesawat</li>
@@ -234,7 +232,8 @@
                         <div id="message-booking"></div>
                         @auth
                             @if ($isOrdered)
-                                <a href="{{ route('order.orderDetail', ['order' => $order->id]) }}"><button class="btn_full">Detail Order</button></a>
+                                <a href="{{ route('order.orderDetail', ['order' => $order->id]) }}"><button
+                                        class="btn_full">Detail Order</button></a>
                             @else
                                 <form method="post" action="{{ route('order.store', ['travel' => $travel->id]) }}">
                                     @csrf
@@ -263,3 +262,20 @@
     </section>
     <!-- End section -->
 @endsection
+@if (request()->query('to') == 'review')
+    @section('custom-js')
+        <script>
+            $(document).ready(function() {
+                $('.nab-tab-li-1').removeClass('active');
+                $('.nab-tab-li-2').addClass('active');
+                $('#tab_1').removeClass('fade in active');
+                $('#tab_2').addClass('fade in active');
+                target_offset = $('.nav-tabs').offset(),
+                    target_top = target_offset.top;
+                $('html, body').animate({
+                    scrollTop: target_top - 100
+                }, 1500);
+            });
+        </script>
+    @endsection
+@endif

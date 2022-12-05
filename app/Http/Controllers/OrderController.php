@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $acceptedDateStart = $request->acceptedDateStart;
@@ -46,12 +41,6 @@ class OrderController extends Controller
         return view('order.index', $data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $travel_id = $request->travel_id;
@@ -62,46 +51,38 @@ class OrderController extends Controller
         return redirect()->route('travel.details', ['travel' => $travel_id]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
     public function show(Order $order)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Order $order)
     {
         $order->update($request->only(['is_accepted', 'testimoni']));
         return redirect()->back()->with('success', 'Berhasil!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Order $order)
     {
         //
     }
 
-    public function history()
+    public function history(Request $request)
     {
-        $orders = Order::where('user_id', Auth::id())->with('travel')->paginate(10);
+
+        $filter = $request->filter ?? 'terbaru';
+        $orders = Order::where('user_id', Auth::id())
+            ->when($filter == 'terbaru', function ($q) {
+                return $q->orderByDesc('created_at');
+            })
+            ->when($filter == 'terlama', function ($q) {
+                return $q->orderBy('created_at');
+            })
+            ->with('travel')
+            ->paginate(10);
         $data = [
             'orders' => $orders,
+            'filter' => $filter
         ];
         return view('main.pages.order-history', $data);
     }

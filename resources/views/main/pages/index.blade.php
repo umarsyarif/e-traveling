@@ -5,217 +5,96 @@
 @endsection
 
 @section('content')
-
     <!-- Slider -->
-	<div id="full-slider-wrapper">
-		<div id="layerslider" style="width:100%;height:600px;">
-			<!-- first slide -->
-			<div class="ls-slide" data-ls="slidedelay: 5000; transition2d:85;">
-				<img src="{{ asset('main/img/slides/slide_2.jpg') }}" class="ls-bg" alt="Slide background">
-				<h3 class="ls-l slide_typo" style="top: 45%; left: 50%;" data-ls="offsetxin:0;durationin:2000;delayin:1000;easingin:easeOutElastic;rotatexin:90;transformoriginin:50% bottom 0;offsetxout:0;rotatexout:90;transformoriginout:50% bottom 0;">More than 100 tours available</h3>
-				<p class="ls-l slide_typo_2" style="top:55%; left:50%;" data-ls="durationin:2000;delayin:1000;easingin:easeOutElastic;">
-					Historic Buildings - Attractions - Museums
-				</p>
-				<a class="ls-l button_intro_2 outline" style="top:65%; left:50%;white-space: nowrap;" data-ls="durationin:2000;delayin:1400;easingin:easeOutElastic;" href='grid.html'>Read more</a>
-			</div>
-			<!-- second slide -->
-			<div class="ls-slide" data-ls="slidedelay:5000; transition2d:103;">
-				<img src="{{ asset('main/img/slides/slide_3.jpg') }}" class="ls-bg" alt="Slide background">
-				<h3 class="ls-l slide_typo" style="top: 45%; left: 50%;" data-ls="offsetxin:0;durationin:2000;delayin:1000;easingin:easeOutElastic;rotatexin:90;transformoriginin:50% bottom 0;offsetxout:0;rotatexout:90;transformoriginout:50% bottom 0;">Discover Fantastic Places</h3>
-				<p class="ls-l slide_typo_2" style="top:55%; left:50%;" data-ls="durationin:2000;delayin:1000;easingin:easeOutElastic;">
-					We offer a variety of services and options
-				</p>
-				<a class="ls-l button_intro_2 outline" style="top:65%; left:50%;white-space: nowrap;" data-ls="durationin:2000;delayin:1400;easingin:easeOutElastic;" href='grid.html'>Read more</a>
-			</div>
-			<!-- third slide -->
-			<div class="ls-slide" data-ls="slidedelay: 5000; transition2d:5;">
-				<img src="{{ asset('main/img/slides/slide_1.jpg') }}" class="ls-bg" alt="Slide background">
-				<h3 class="ls-l slide_typo" style="top:45%; left: 50%;" data-ls="offsetxin:0;durationin:2000;delayin:1000;easingin:easeOutElastic;rotatexin:90;transformoriginin:50% bottom 0;offsetxout:0;rotatexout:90;transformoriginout:50% bottom 0;">Enjoy a Lovely Tour</h3>
-				<p class="ls-l slide_typo_2" style="top:55%; left:50%;" data-ls="durationin:2000;delayin:1000;easingin:easeOutElastic;">
-					Buildings - Attractions - Museums
-				</p>
-				<a class="ls-l button_intro_2" style="top:65%; left:50%;" data-ls="durationin:2000;delayin:1400;easingin:easeOutElastic;" href='grid.html'>Explore</a>
-			</div>
-		</div>
-	</div>
-	<!-- End layerslider -->
+    <div id="full-slider-wrapper">
+        <div id="layerslider" style="width:100%;height:600px;">
+            <!-- first slide -->
+            <div class="ls-slide" data-ls="slidedelay: 5000; transition2d:85;">
+                <img src="{{ asset('main/images/bg-2.jpg') }}" class="ls-bg" alt="Slide background">
+                <h3 class="ls-l slide_typo" style="top: 45%; left: 50%;"
+                    data-ls="offsetxin:0;durationin:2000;delayin:1000;easingin:easeOutElastic;rotatexin:90;transformoriginin:50% bottom 0;offsetxout:0;rotatexout:90;transformoriginout:50% bottom 0;">
+                    Lebih dari {{ $travelCount - 1 }} travel tersedia</h3>
+                <p class="ls-l slide_typo_2" style="top:55%; left:50%;"
+                    data-ls="durationin:2000;delayin:1000;easingin:easeOutElastic;">
+                    Historic Buildings - Attractions - Museums
+                </p>
+                <a class="ls-l button_intro_2 outline" style="top:65%; left:50%;white-space: nowrap;"
+                    data-ls="durationin:2000;delayin:1400;easingin:easeOutElastic;" href='{{ route('travel.list') }}'>Lihat
+                    semua</a>
+            </div>
+            <!-- second slide -->
+            <div class="ls-slide" data-ls="slidedelay:5000; transition2d:103;">
+                <img src="{{ asset('main/img/slides/slide_3.jpg') }}" class="ls-bg" alt="Slide background">
+                <h3 class="ls-l slide_typo" style="top: 45%; left: 50%;"
+                    data-ls="offsetxin:0;durationin:2000;delayin:1000;easingin:easeOutElastic;rotatexin:90;transformoriginin:50% bottom 0;offsetxout:0;rotatexout:90;transformoriginout:50% bottom 0;">
+                    Discover Fantastic Places</h3>
+                <p class="ls-l slide_typo_2" style="top:55%; left:50%;"
+                    data-ls="durationin:2000;delayin:1000;easingin:easeOutElastic;">
+                    We offer a variety of services and options
+                </p>
+                <a class="ls-l button_intro_2 outline" style="top:65%; left:50%;white-space: nowrap;"
+                    data-ls="durationin:2000;delayin:1400;easingin:easeOutElastic;" href='grid.html'>Read more</a>
+            </div>
+            <!-- third slide -->
+            <div class="ls-slide" data-ls="slidedelay: 5000; transition2d:5;">
+                <img src="{{ asset('main/img/slides/slide_1.jpg') }}" class="ls-bg" alt="Slide background">
+                <h3 class="ls-l slide_typo" style="top:45%; left: 50%;"
+                    data-ls="offsetxin:0;durationin:2000;delayin:1000;easingin:easeOutElastic;rotatexin:90;transformoriginin:50% bottom 0;offsetxout:0;rotatexout:90;transformoriginout:50% bottom 0;">
+                    Enjoy a Lovely Tour</h3>
+                <p class="ls-l slide_typo_2" style="top:55%; left:50%;"
+                    data-ls="durationin:2000;delayin:1000;easingin:easeOutElastic;">
+                    Buildings - Attractions - Museums
+                </p>
+                <a class="ls-l button_intro_2" style="top:65%; left:50%;"
+                    data-ls="durationin:2000;delayin:1400;easingin:easeOutElastic;" href='grid.html'>Explore</a>
+            </div>
+        </div>
+    </div>
+    <!-- End layerslider -->
 
-	<section class="wrapper">
-		<div class="divider_border"></div>
+    <section class="wrapper">
+        <div class="divider_border"></div>
 
-		<div class="container">
+        <div class="container">
+            <div class="main_title">
+                <h2>Our <span>Top</span> Travel Tours</h2>
+                <p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p>
+            </div>
 
-			<div class="main_title">
-				<h2>Our <span>Top</span> Travel Tours</h2>
-				<p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p>
-			</div>
-			<div class="row">
-				<div class="col-md-4 col-sm-6 wow fadeIn animated" data-wow-delay="0.2s">
-					<div class="img_wrapper">
-						<div class="ribbon">
-							<span>Popular</span>
-						</div>
-						<div class="price_grid">
-							<sup>$</sup>450
-						</div>
-						<div class="img_container">
-							<a href="detail-page.html">
-								<img src="{{ asset('main/img/tour_list_1.jpg') }}" width="800" height="533" class="img-responsive" alt="">
-								<div class="short_info">
-									<h3>Las Vegas</h3>
-									<em>Duration 3 days</em>
-									<p>
-										A quam morbi ut arcu, eget neque molestie, ullamcorper congue pharetra, hendrerit odio consectetuer.
-									</p>
-									<div class="score_wp">Superb
-										<div class="score">7.5</div>
-									</div>
-								</div>
-							</a>
-						</div>
-					</div>
-					<!-- End img_wrapper -->
-				</div>
+            <div class="row">
+                @foreach ($travels as $travel)
+                    <div class="col-md-4 col-sm-6 wow fadeIn animated" data-wow-delay="0.2s">
+                        <div class="img_wrapper">
+                            <div class="ribbon">
+                                <span>Popular</span>
+                            </div>
+                            <div class="price_grid">
+                                <sup>Rp. </sup>{{ number_format($travel->price, 2, ',', '.') }}
+                            </div>
+                            <div class="img_container">
+                                <a href="{{ route('travel.details', ['travel' => $travel->id]) }}">
+                                    <img src="{{ asset($travel->img) }}" width="800" height="250"
+                                        style="object-fit: cover" alt="">
+                                    <div class="short_info">
+                                        <h3>{{ $travel->name }}</h3>
+                                        <em>Duration {{ $travel->duration }} days</em>
+                                        <p>
+                                            {!! Str::limit($travel->description, 120, ' ...') !!}
+                                        </p>
+                                        <div class="score_wp">Sisa Kuota
+                                            <div class="score">{{ $travel->quota - $travel->fulfilled_quota }}</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- End img_wrapper -->
+                    </div>
+                @endforeach
+            </div>
+            <!-- End row -->
 
-				<div class="col-md-4 col-sm-6 wow fadeIn animated" data-wow-delay="0.2s">
-					<div class="img_wrapper">
-						<div class="ribbon">
-							<span>Popular</span>
-						</div>
-						<div class="price_grid">
-							<sup>$</sup>520
-						</div>
-						<div class="img_container">
-							<a href="detail-page.html">
-								<img src="{{ asset('main/img/tour_list_2.jpg') }}" width="800" height="533" class="img-responsive" alt="">
-								<div class="short_info">
-									<h3>London</h3>
-									<em>Duration 3 days</em>
-									<p>
-										A quam morbi ut arcu, eget neque molestie, ullamcorper congue pharetra, hendrerit odio consectetuer.
-									</p>
-									<div class="score_wp">Superb
-										<div class="score">7.5</div>
-									</div>
-								</div>
-							</a>
-						</div>
-					</div>
-					<!-- End img_wrapper -->
-				</div>
-
-				<div class="col-md-4 col-sm-6 wow fadeIn animated" data-wow-delay="0.2s">
-					<div class="img_wrapper">
-						<div class="ribbon">
-							<span>Popular</span>
-						</div>
-						<div class="price_grid">
-							<sup>$</sup>610
-						</div>
-						<div class="img_container">
-							<a href="detail-page.html">
-								<img src="{{ asset('main/img/tour_list_5.jpg') }}" width="800" height="533" class="img-responsive" alt="">
-								<div class="short_info">
-									<h3>Rome - Vatican</h3>
-									<em>Duration 3 days</em>
-									<p>
-										A quam morbi ut arcu, eget neque molestie, ullamcorper congue pharetra, hendrerit odio consectetuer.
-									</p>
-									<div class="score_wp">Superb
-										<div class="score">7.5</div>
-									</div>
-								</div>
-							</a>
-						</div>
-					</div>
-					<!-- End img_wrapper -->
-				</div>
-
-				<div class="col-md-4 col-sm-6 wow fadeIn animated" data-wow-delay="0.2s">
-					<div class="img_wrapper">
-						<div class="ribbon">
-							<span>Popular</span>
-						</div>
-						<div class="price_grid">
-							<sup>$</sup>750
-						</div>
-						<div class="img_container">
-							<a href="detail-page.html">
-								<img src="{{ asset('main/img/tour_list_6.jpg') }}" width="800" height="533" class="img-responsive" alt="">
-								<div class="short_info">
-									<h3>Maldive</h3>
-									<em>Duration 3 days</em>
-									<p>
-										A quam morbi ut arcu, eget neque molestie, ullamcorper congue pharetra, hendrerit odio consectetuer.
-									</p>
-									<div class="score_wp">Superb
-										<div class="score">7.5</div>
-									</div>
-								</div>
-							</a>
-						</div>
-					</div>
-					<!-- End img_wrapper -->
-				</div>
-
-				<div class="col-md-4 col-sm-6 wow fadeIn animated" data-wow-delay="0.2s">
-					<div class="img_wrapper">
-						<div class="ribbon">
-							<span>Popular</span>
-						</div>
-						<div class="price_grid">
-							<sup>$</sup>520
-						</div>
-						<div class="img_container">
-							<a href="detail-page.html">
-								<img src="{{ asset('main/img/tour_list_7.jpg') }}" width="800" height="533" class="img-responsive" alt="">
-								<div class="short_info">
-									<h3>London</h3>
-									<em>Duration 3 days</em>
-									<p>
-										A quam morbi ut arcu, eget neque molestie, ullamcorper congue pharetra, hendrerit odio consectetuer.
-									</p>
-									<div class="score_wp">Superb
-										<div class="score">7.5</div>
-									</div>
-								</div>
-							</a>
-						</div>
-					</div>
-					<!-- End img_wrapper -->
-				</div>
-
-				<div class="col-md-4 col-sm-6 wow fadeIn animated" data-wow-delay="0.2s">
-					<div class="img_wrapper">
-						<div class="ribbon">
-							<span>Popular</span>
-						</div>
-						<div class="price_grid">
-							<sup>$</sup>440
-						</div>
-						<div class="img_container">
-							<a href="detail-page.html">
-								<img src="{{ asset('main/img/tour_list_9.jpg') }}" width="800" height="533" class="img-responsive" alt="">
-								<div class="short_info">
-									<h3>Dubai</h3>
-									<em>Duration 3 days</em>
-									<p>
-										A quam morbi ut arcu, eget neque molestie, ullamcorper congue pharetra, hendrerit odio consectetuer.
-									</p>
-									<div class="score_wp">Superb
-										<div class="score">7.5</div>
-									</div>
-								</div>
-							</a>
-						</div>
-					</div>
-					<!-- End img_wrapper -->
-				</div>
-
-			</div>
-			<!-- End row -->
-
-			<div class="main_title_2">
+            {{-- <div class="main_title_2">
 				<h3>View other <span>popular</span> tours</h3>
 				<p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p>
 			</div>
@@ -299,136 +178,121 @@
 				</div>
 
 			</div>
-			<!-- End row -->
+			<!-- End row --> --}}
+            @if ($travelCount > 0)
+                <p class="text-center add_bottom_45">
+                    <a href="{{ route('travel.list') }}"><button class="btn_1">Lihat semua
+                            ({{ $travelCount }})</button></a>
+                </p>
+            @endif
 
-			<p class="text-center add_bottom_45">
-				<a href="grid.html" class="btn_1">Explore all tours (24)</a>
-			</p>
+        </div>
+    </section>
+    <!-- End section -->
 
-		</div>
-	</section>
-	<!-- End section -->
+    <section class="container margin_60">
+        <div class="main_title">
+            <h3>Why choose BesTours</h3>
+            <p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="box_how">
+                    <div class="icon_how"><span class="icon_set_1_icon-81"></span>
+                    </div>
+                    <h4>Best price guarantee</h4>
+                    <p>Lorem ipsum dolor sit amet, et cum civibus referrentur, at propriae forensibus qui. Duo aliquip
+                        necessitatibus ne.</p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="box_how">
+                    <div class="icon_how"><span class="icon_set_1_icon-94"></span>
+                    </div>
+                    <h4>Professional local guides</h4>
+                    <p>Lorem ipsum dolor sit amet, et cum civibus referrentur, at propriae forensibus qui. Duo aliquip
+                        necessitatibus ne.</p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="box_how">
+                    <div class="icon_how"><span class="icon_set_1_icon-92"></span>
+                    </div>
+                    <h4>Certifcate of Excellence</h4>
+                    <p>Lorem ipsum dolor sit amet, et cum civibus referrentur, at propriae forensibus qui. Duo aliquip
+                        necessitatibus ne.</p>
+                </div>
+            </div>
+        </div>
+        <!-- End Row -->
+    </section>
+    <!-- End Container -->
 
-	<section class="container margin_60">
-		<div class="main_title">
-			<h3>Why choose BesTours</h3>
-			<p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p>
-		</div>
-		<div class="row">
-			<div class="col-sm-4">
-				<div class="box_how">
-					<div class="icon_how"><span class="icon_set_1_icon-81"></span>
-					</div>
-					<h4>Best price guarantee</h4>
-					<p>Lorem ipsum dolor sit amet, et cum civibus referrentur, at propriae forensibus qui. Duo aliquip necessitatibus ne.</p>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="box_how">
-					<div class="icon_how"><span class="icon_set_1_icon-94"></span>
-					</div>
-					<h4>Professional local guides</h4>
-					<p>Lorem ipsum dolor sit amet, et cum civibus referrentur, at propriae forensibus qui. Duo aliquip necessitatibus ne.</p>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="box_how">
-					<div class="icon_how"><span class="icon_set_1_icon-92"></span>
-					</div>
-					<h4>Certifcate of Excellence</h4>
-					<p>Lorem ipsum dolor sit amet, et cum civibus referrentur, at propriae forensibus qui. Duo aliquip necessitatibus ne.</p>
-				</div>
-			</div>
-		</div>
-		<!-- End Row -->
-	</section>
-	<!-- End Container -->
+    <section class="promo_full">
+        <div class="promo_full_wp">
+            <div>
+                <h3>What Clients say<span>Id tale utinam ius, an mei omnium recusabo iracundia.</span></h3>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="owl-carousel owl-theme carousel_testimonials">
+                                @foreach ($reviews as $review)
+                                    <div>
+                                        <div class="box_overlay" style="min-height: 128px">
+                                            <div class="pic">
+                                                <figure><img src="{{ asset('main/img/testimonial_1.jpg') }}" alt=""
+                                                        class="img-circle">
+                                                </figure>
+                                                <h4>{{ $review->user->name }}<small>12 October 2015</small></h4>
+                                            </div>
+                                            <div class="comment"
+                                                style="margin: 0;
+											position: absolute;
+											top: 50%;
+											-ms-transform: translateY(-50%);
+											transform: translateY(-50%);">
+                                                "{{ $review->testimoni }}"
+                                            </div>
+                                        </div>
+                                        <!-- End box_overlay -->
+                                    </div>
+                                @endforeach
 
-	<section class="promo_full">
-		<div class="promo_full_wp">
-			<div>
-				<h3>What Clients say<span>Id tale utinam ius, an mei omnium recusabo iracundia.</span></h3>
-				<div class="container">
-					<div class="row">
-						<div class="col-md-8 col-md-offset-2">
-							<div class="owl-carousel owl-theme carousel_testimonials">
-								<div>
-									<div class="box_overlay">
-										<div class="pic">
-											<figure><img src="{{ asset('main/img/testimonial_1.jpg') }}" alt="" class="img-circle">
-											</figure>
-											<h4>Roberta<small>12 October 2015</small></h4>
-										</div>
-										<div class="comment">
-											"Mea ad postea meliore fuisset. Timeam repudiare id eum, ex paulo dictas elaboraret sed, mel cu unum nostrud."
-										</div>
-									</div>
-									<!-- End box_overlay -->
-								</div>
-
-								<div>
-									<div class="box_overlay">
-										<div class="pic">
-											<figure><img src="{{ asset('main/img/testimonial_1.jpg') }}" alt="" class="img-circle">
-											</figure>
-											<h4>Roberta<small>12 October 2015</small></h4>
-										</div>
-										<div class="comment">
-											"No nam indoctum accommodare, vix ei discere civibus philosophia. Vis ea dicant diceret ocurreret."
-										</div>
-									</div>
-									<!-- End box_overlay -->
-								</div>
-
-								<div>
-									<div class="box_overlay">
-										<div class="pic">
-											<figure><img src="{{ asset('main/img/testimonial_1.jpg') }}" alt="" class="img-circle">
-											</figure>
-											<h4>Roberta<small>12 October 2015</small></h4>
-										</div>
-										<div class="comment">
-											"No nam indoctum accommodare, vix ei discere civibus philosophia. Vis ea dicant diceret ocurreret."
-										</div>
-									</div>
-									<!-- End box_overlay -->
-								</div>
-
-							</div>
-							<!-- End carousel_testimonials -->
-						</div>
-						<!-- End col-md-8 -->
-					</div>
-					<!-- End row -->
-				</div>
-				<!-- End container -->
-			</div>
-			<!-- End promo_full_wp -->
-		</div>
-		<!-- End promo_full -->
-	</section>
-	<!-- End section -->
+                            </div>
+                            <!-- End carousel_testimonials -->
+                        </div>
+                        <!-- End col-md-8 -->
+                    </div>
+                    <!-- End row -->
+                </div>
+                <!-- End container -->
+            </div>
+            <!-- End promo_full_wp -->
+        </div>
+        <!-- End promo_full -->
+    </section>
+    <!-- End section -->
 @endsection
 
 @section('custom-js')
-<script src="{{ asset('main/layerslider/js/greensock.js') }}"></script>
-<script src="{{ asset('main/layerslider/js/layerslider.transitions.js') }}"></script>
-<script src="{{ asset('main/layerslider/js/layerslider.kreaturamedia.jquery.js') }}"></script>
+    <script src="{{ asset('main/layerslider/js/greensock.js') }}"></script>
+    <script src="{{ asset('main/layerslider/js/layerslider.transitions.js') }}"></script>
+    <script src="{{ asset('main/layerslider/js/layerslider.kreaturamedia.jquery.js') }}"></script>
 
-<script type="text/javascript">
-    'use strict';
-    $('#layerslider').layerSlider({
-        autoStart: true,
-        navButtons: false,
-        navStartStop: false,
-        showCircleTimer: false,
-        responsive: true,
-        responsiveUnder: 1280,
-        layersContainer: 1200,
-        skinsPath: 'main/layerslider/skins/'
+    <script type="text/javascript">
+        'use strict';
+
+        $('#layerslider').layerSlider({
+            autoStart: true,
+            navButtons: false,
+            navStartStop: false,
+            showCircleTimer: false,
+            responsive: true,
+            responsiveUnder: 1280,
+            layersContainer: 1200,
+            skinsPath: 'main/layerslider/skins/'
             // Please make sure that you didn't forget to add a comma to the line endings
             // except the last line!
-    });
-</script>
-
+        });
+    </script>
 @endsection

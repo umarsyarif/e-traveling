@@ -27,14 +27,24 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('main.pages.index');
+
+        $travels = Travel::where('start_date', '>', today())->limit(6)->get();
+        $reviews = Order::select('user_id', 'testimoni')->whereNotNull('testimoni')->with('user')->get();
+        $travelCount = Travel::where('start_date', '>', today())->count();
+
+        $data = [
+            'travels' => $travels,
+            'travelCount' => $travelCount,
+            'reviews' => $reviews
+        ];
+        return view('main.pages.index', $data);
     }
 
     public function dashboard()
     {
         $incomingTravels = Travel::where('start_date', '>', today())->limit(5)->get();
 
-        $newOrders = Order::whereHas('travel', function($q){
+        $newOrders = Order::whereHas('travel', function ($q) {
             $q->where('start_date', '>', today());
         })->whereNull('accepted_at')->get();
 
@@ -45,10 +55,11 @@ class HomeController extends Controller
             ],
             [
                 'title' => 'Destinasi Wisata',
-                'count' => Travel::count()],
+                'count' => Travel::count()
+            ],
             [
                 'title' => 'Pesanan Selesai',
-                'count' => Order::whereHas('travel', function($q){
+                'count' => Order::whereHas('travel', function ($q) {
                     $q->where('start_date', '<=', today());
                 })->whereNotNull('accepted_at')->count()
             ],

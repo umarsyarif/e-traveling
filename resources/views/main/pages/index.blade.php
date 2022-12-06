@@ -10,13 +10,13 @@
         <div id="layerslider" style="width:100%;height:600px;">
             <!-- first slide -->
             <div class="ls-slide" data-ls="slidedelay: 5000; transition2d:85;">
-                <img src="{{ asset('main/images/bg-2.jpg') }}" class="ls-bg" alt="Slide background">
+                <img src="{{ asset('main/images/1600_667/1.png') }}" class="ls-bg" alt="Slide background">
                 <h3 class="ls-l slide_typo" style="top: 45%; left: 50%;"
                     data-ls="offsetxin:0;durationin:2000;delayin:1000;easingin:easeOutElastic;rotatexin:90;transformoriginin:50% bottom 0;offsetxout:0;rotatexout:90;transformoriginout:50% bottom 0;">
                     Lebih dari {{ $travelCount - 1 }} travel tersedia</h3>
                 <p class="ls-l slide_typo_2" style="top:55%; left:50%;"
                     data-ls="durationin:2000;delayin:1000;easingin:easeOutElastic;">
-                    Historic Buildings - Attractions - Museums
+                    Wisata Alam - Taman Rekreasi - Museum dan Sejarah
                 </p>
                 <a class="ls-l button_intro_2 outline" style="top:65%; left:50%;white-space: nowrap;"
                     data-ls="durationin:2000;delayin:1400;easingin:easeOutElastic;" href='{{ route('travel.list') }}'>Lihat
@@ -24,29 +24,31 @@
             </div>
             <!-- second slide -->
             <div class="ls-slide" data-ls="slidedelay:5000; transition2d:103;">
-                <img src="{{ asset('main/img/slides/slide_3.jpg') }}" class="ls-bg" alt="Slide background">
+                <img src="{{ asset('main/images/1600_667/2.png') }}" class="ls-bg" alt="Slide background">
                 <h3 class="ls-l slide_typo" style="top: 45%; left: 50%;"
                     data-ls="offsetxin:0;durationin:2000;delayin:1000;easingin:easeOutElastic;rotatexin:90;transformoriginin:50% bottom 0;offsetxout:0;rotatexout:90;transformoriginout:50% bottom 0;">
-                    Discover Fantastic Places</h3>
+                    Temukan tempat yang fantastis</h3>
                 <p class="ls-l slide_typo_2" style="top:55%; left:50%;"
                     data-ls="durationin:2000;delayin:1000;easingin:easeOutElastic;">
-                    We offer a variety of services and options
+                    Kami menawarkan berbagai pilihan dan layanan
                 </p>
                 <a class="ls-l button_intro_2 outline" style="top:65%; left:50%;white-space: nowrap;"
-                    data-ls="durationin:2000;delayin:1400;easingin:easeOutElastic;" href='grid.html'>Read more</a>
+                    data-ls="durationin:2000;delayin:1400;easingin:easeOutElastic;" href='{{ route('travel.list') }}'>Lihat
+                    semua</a>
             </div>
             <!-- third slide -->
             <div class="ls-slide" data-ls="slidedelay: 5000; transition2d:5;">
-                <img src="{{ asset('main/img/slides/slide_1.jpg') }}" class="ls-bg" alt="Slide background">
+                <img src="{{ asset('main/images/1600_667/3.png') }}" class="ls-bg" alt="Slide background">
                 <h3 class="ls-l slide_typo" style="top:45%; left: 50%;"
                     data-ls="offsetxin:0;durationin:2000;delayin:1000;easingin:easeOutElastic;rotatexin:90;transformoriginin:50% bottom 0;offsetxout:0;rotatexout:90;transformoriginout:50% bottom 0;">
-                    Enjoy a Lovely Tour</h3>
+                    Dapatkan pengalaman yang indah</h3>
                 <p class="ls-l slide_typo_2" style="top:55%; left:50%;"
                     data-ls="durationin:2000;delayin:1000;easingin:easeOutElastic;">
-                    Buildings - Attractions - Museums
+                    Nikmati berbagai objek wisata dan rekreasi
                 </p>
                 <a class="ls-l button_intro_2" style="top:65%; left:50%;"
-                    data-ls="durationin:2000;delayin:1400;easingin:easeOutElastic;" href='grid.html'>Explore</a>
+                    data-ls="durationin:2000;delayin:1400;easingin:easeOutElastic;" href='{{ route('travel.list') }}'>lihat
+                    semua</a>
             </div>
         </div>
     </div>
@@ -57,8 +59,8 @@
 
         <div class="container">
             <div class="main_title">
-                <h2>Our <span>Top</span> Travel Tours</h2>
-                <p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p>
+                <h2>Tur <span>Baru</span> Kami</h2>
+                <p>Jelajahi dunia baru. Dapatkan pengalaman dan temukan keindahan tanpa batas. </p>
             </div>
 
             <div class="row">
@@ -192,35 +194,36 @@
 
     <section class="container margin_60">
         <div class="main_title">
-            <h3>Why choose BesTours</h3>
-            <p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p>
+            <h3>Mengapa BesTours</h3>
+            {{-- <p></p> --}}
         </div>
         <div class="row">
             <div class="col-sm-4">
                 <div class="box_how">
                     <div class="icon_how"><span class="icon_set_1_icon-81"></span>
                     </div>
-                    <h4>Best price guarantee</h4>
-                    <p>Lorem ipsum dolor sit amet, et cum civibus referrentur, at propriae forensibus qui. Duo aliquip
-                        necessitatibus ne.</p>
+
+                    <h4>Layanan Terbaik</h4>
+                    <p>BesTours merupakan salah satu agen travel terbaik yang memberikan pelayanan terbaik serta pengalaman
+                        tak terlupakan.</p>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="box_how">
                     <div class="icon_how"><span class="icon_set_1_icon-94"></span>
                     </div>
-                    <h4>Professional local guides</h4>
-                    <p>Lorem ipsum dolor sit amet, et cum civibus referrentur, at propriae forensibus qui. Duo aliquip
-                        necessitatibus ne.</p>
+                    <h4>Staf Tur Profesional</h4>
+                    <p>Kami memiliki staf yang berpengalaman dan siap melayani anda mulai dari
+                        rekomendasi perjalanan, informasi destinasi hingga reservasi.</p>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="box_how">
                     <div class="icon_how"><span class="icon_set_1_icon-92"></span>
                     </div>
-                    <h4>Certifcate of Excellence</h4>
-                    <p>Lorem ipsum dolor sit amet, et cum civibus referrentur, at propriae forensibus qui. Duo aliquip
-                        necessitatibus ne.</p>
+                    <h4>Penawaran Terbaik</h4>
+                    <p>Dapatkan penawaran terbaik untuk paket liburan ke berbagai tempat impian Anda. Perjalanan yang indah
+                        dan hemat!</p>
                 </div>
             </div>
         </div>
@@ -231,7 +234,7 @@
     <section class="promo_full">
         <div class="promo_full_wp">
             <div>
-                <h3>What Clients say<span>Id tale utinam ius, an mei omnium recusabo iracundia.</span></h3>
+                <h3>Testimoni<span>Dari mereka yang telah mempercayai kami.</span></h3>
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">

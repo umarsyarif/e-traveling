@@ -137,12 +137,19 @@
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-md-3 col-sm-3">
+                <div class="col-md-5 col-sm-12">
+                    <img src="{{ asset('main/img/logo_menu.png') }}" width="145" height="34" alt="Bestours">
+                    <p class="mt-3">BesTours adalah agen perjalanan yang melayani perjalanan
+                        individu serta grup. Dengan paket liburan terlengkap dan hemat.
+                        BesTours menawarkan liburan yang nyaman dan berbeda bagi pelanggannya. </p>
+
+                </div>
+                <div class="col-md-4 col-sm-3">
                     <h3>Need help?</h3>
                     <a href="tel://004542344599" id="phone">+45 423 445 99</a>
                     <a href="mailto:help@citytours.com" id="email_footer">help@bestours.com</a>
                 </div>
-                <div class="col-md-2 col-sm-3">
+                <div class="col-md-3 col-sm-3">
                     <h3>About</h3>
                     <ul>
                         <li><a href="#">About us</a>
@@ -157,32 +164,8 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-4 col-sm-6">
-                    <h3>Twitter feed</h3>
-                    {{-- <div class="latest-tweets" data-number="10" data-username="mrlowlander" data-mode="fade"
-                        data-pager="false" data-nextselector=".tweets-next" data-prevselector=".tweets-prev"
-                        data-adaptiveheight="true">
-                        <!-- data-username="your twitter username" -->
-                    </div> --}}
-                    <div class="tweet-control">
-                        <div class="tweets-prev"></div>
-                        <div class="tweets-next"></div>
-                    </div>
-                    <!-- End .tweet-control -->
-                </div>
-                <div class="col-md-3 col-sm-12">
-                    <h3>Newsletter</h3>
-                    <div id="message-newsletter_2">
-                    </div>
-                    <form method="post" action="{{ asset('main/assets/newsletter.php') }}" name="newsletter_2"
-                        id="newsletter_2">
-                        <div class="form-group">
-                            <input name="email_newsletter_2" id="email_newsletter_2" type="email" value=""
-                                placeholder="Your email" class="form-control">
-                        </div>
-                        <input type="submit" value="Subscribe" class="btn_1" id="submit-newsletter_2">
-                    </form>
-                </div>
+
+
             </div>
             <!-- End row -->
             <hr>

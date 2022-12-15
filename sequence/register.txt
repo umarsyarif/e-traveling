@@ -1,0 +1,19 @@
+@startuml
+actor Customer
+boundary RegisterView
+boundary Dashboard
+control RegisterController
+entity User
+
+RegisterView --> Customer : Show Register Form
+Customer -> RegisterView : Input registration data
+Customer -> RegisterView : Klik Register button
+RegisterView -> RegisterController : create()
+RegisterController -> User : User::create()
+User --> RegisterController : reponse
+alt register success
+    RegisterController --> Dashboard : redirect
+else register failed
+    RegisterController --> RegisterView : redirect with error message
+end
+@enduml

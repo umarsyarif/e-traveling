@@ -1,0 +1,46 @@
+@startuml
+actor Karyawan
+boundary DashboardView
+boundary TravelIndexView
+boundary TravelShowView
+control TravelController
+entity Travel
+
+'Read
+Karyawan -> DashboardView : Klik menu Data Wisata
+DashboardView -> TravelController : index()
+TravelController -> Travel : Travel::get()
+Travel --> TravelController : response
+TravelController --> TravelIndexView : Show data Wisata
+
+'Create
+Karyawan -> TravelIndexView : Klik Tambah Wisata button
+TravelIndexView -> TravelIndexView : Show create wisata modal
+Karyawan -> TravelIndexView : Input data Wisata
+Karyawan -> TravelIndexView : Klik Save button
+TravelIndexView -> TravelController : store()
+TravelController -> Travel : Travel::create()
+Travel --> TravelController : response
+alt create success
+    TravelController --> TravelIndexView : redirect with success message
+else create failed
+    TravelController --> TravelIndexView : redirect with error message
+end
+
+'Update
+Karyawan -> TravelIndexView : Klik Cek info Wisata button
+TravelIndexView -> TravelShowView : Show wisata detail page
+Karyawan -> TravelShowView : Klik Edit Wisata button
+TravelShowView -> TravelShowView : Show update wisata form
+Karyawan -> TravelShowView : Input data Wisata
+Karyawan -> TravelShowView : Klik Save button
+TravelShowView -> TravelController : update()
+TravelController -> Travel : Travel::update()
+Travel --> TravelController : response
+alt update success
+    TravelController --> TravelShowView : redirect with success message
+else update failed
+    TravelController --> TravelShowView : redirect with error message
+end
+
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+actor Karyawan
+boundary DashboardView
+boundary TravelIndexView
+boundary TravelShowView
+control TravelController
+control OrderController
+entity Travel
+entity Order
+
+'Read
+Karyawan -> DashboardView : Klik menu Wisata
+DashboardView -> TravelController : index()
+TravelController -> Travel : Travel::get()
+Travel --> TravelController : response
+TravelController --> TravelIndexView : Show data Travel
+
+'Show
+Karyawan -> TravelIndexView : Klik Lihat Info Wisata button
+TravelIndexView -> TravelController : show()
+TravelController -> Travel : Travel::find()
+Travel --> TravelController : response
+TravelController --> TravelShowView : redirect
+Karyawan -> TravelShowView : Klik terima button
+TravelShowView -> TravelShowView : Show confirm modal
+Karyawan -> TravelShowView : Klik confirm button
+TravelShowView -> OrderController : update()
+OrderController -> Order : Order::update()
+Order --> OrderController : response
+OrderController --> TravelShowView : redirect with success message
+@enduml

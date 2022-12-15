@@ -1,0 +1,43 @@
+@startuml
+actor Admin
+boundary DashboardView
+boundary EmployeeIndexView
+control EmployeeController
+entity User
+
+'Read
+Admin -> DashboardView : Klik menu Data Karyawan
+DashboardView -> EmployeeController : index()
+EmployeeController -> User : User::get()
+User --> EmployeeController : response
+EmployeeController --> EmployeeIndexView : Show data Karyawan
+
+'Create
+Admin -> EmployeeIndexView : Klik Tambah Karyawan button
+EmployeeIndexView -> EmployeeIndexView : Show create Karyawan modal
+Admin -> EmployeeIndexView : Input data Karyawan
+Admin -> EmployeeIndexView : Klik Save button
+EmployeeIndexView -> EmployeeController : store()
+EmployeeController -> User : User::create()
+User --> EmployeeController : response
+alt create success
+    EmployeeController --> EmployeeIndexView : redirect with success message
+else create failed
+    EmployeeController --> EmployeeIndexView : redirect with error message
+end
+
+'Update
+Admin -> EmployeeIndexView : Klik Ganti Password button
+EmployeeIndexView -> EmployeeIndexView : Show change password modal
+Admin -> EmployeeIndexView : Input password & konfirmasi
+Admin -> EmployeeIndexView : Klik Save button
+alt password == konfirmasi password
+    EmployeeIndexView -> EmployeeController : update()
+    EmployeeController -> User : User::update()
+    User --> EmployeeController : response
+    EmployeeController --> EmployeeIndexView : redirect with success message
+else password != konfirmasi password
+    EmployeeIndexView -> EmployeeIndexView : Show error alert
+end
+
+@enduml

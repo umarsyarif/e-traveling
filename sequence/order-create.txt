@@ -1,0 +1,17 @@
+@startuml
+actor Customer
+boundary HomeView
+boundary TravelDetailView
+control TravelController
+control OrderController
+entity Order
+
+Customer -> HomeView : Klik wisata
+HomeView -> TravelController : Travel::find()
+TravelController -> TravelDetailView : Show detail Wisata page
+Customer -> TravelDetailView : Klik Order
+TravelDetailView -> OrderController : create()
+OrderController -> Order : Order::create()
+Order --> OrderController : response
+OrderController --> TravelDetailView : redirect with success message
+@enduml

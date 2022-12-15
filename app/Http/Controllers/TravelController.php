@@ -26,7 +26,7 @@ class TravelController extends Controller
             ->when($filter == "closed", function ($q) use ($filter) {
                 return $q->where('start_date', '<', date('Y-m-d'));
             })
-            ->get();
+            ->latest()->get();
 
         $data = [
             'travels' => $travels

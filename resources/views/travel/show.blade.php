@@ -160,6 +160,7 @@ $title = $travel->name;
                                         <thead>
                                             <tr>
                                                 <th>#</th>
+                                                <th>Order ID</th>
                                                 <th>Nama</th>
                                                 <th>Tanggal</th>
                                                 <th>Status</th>
@@ -172,6 +173,7 @@ $title = $travel->name;
                                             @foreach ($orders as $row)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ "#$row->order_code" }}</td>
                                                     <td>{{ $row->user->name }}</td>
                                                     <td>{{ $row->created_at->format('d F Y') }}</td>
                                                     <td>

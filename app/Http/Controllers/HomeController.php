@@ -30,7 +30,7 @@ class HomeController extends Controller
 
         $travels = Travel::where('start_date', '>', today())->limit(6)->get();
         $reviews = Order::select('user_id', 'testimoni')->whereNotNull('testimoni')->with('user')->get();
-        $travelCount = Travel::where('start_date', '>', today())->count();
+        $travelCount = Travel::count();
 
         $data = [
             'travels' => $travels,

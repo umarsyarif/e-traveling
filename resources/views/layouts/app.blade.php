@@ -11,15 +11,15 @@
     <title>BESTOURS - Travel and Tours multipurpose template</title>
 
     <!-- Favicons-->
-    <link rel="shortcut icon" href="{{ asset('main/img/favicon.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('cropped-LOGO-AET-INDONESIA-FOR-WEB-01-192x192.png') }}" type="image/x-icon">
     <link rel="apple-touch-icon" type="image/x-icon"
-        href="{{ asset('main/img/apple-touch-icon-57x57-precomposed.png') }}">
+        href="{{ asset('cropped-LOGO-AET-INDONESIA-FOR-WEB-01-192x192.png') }}">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72"
-        href="{{ asset('main/img/apple-touch-icon-72x72-precomposed.png') }}">
+        href="{{ asset('cropped-LOGO-AET-INDONESIA-FOR-WEB-01-192x192.png') }}">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114"
-        href="{{ asset('main/img/apple-touch-icon-114x114-precomposed.png') }}">
+        href="{{ asset('cropped-LOGO-AET-INDONESIA-FOR-WEB-01-192x192.png') }}">
     <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144"
-        href="{{ asset('main/img/apple-touch-icon-144x144-precomposed.png') }}">
+        href="{{ asset('cropped-LOGO-AET-INDONESIA-FOR-WEB-01-192x192.png') }}">
 
     <!-- GOOGLE WEB FONT -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Satisfy" rel="stylesheet">
@@ -63,7 +63,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <a href="tel://004542344599" id="phone_top">0045 043204434</a><span id="opening">Mon - Sat
+                            <a href="tel://6282288320952" id="phone_top">+6282288320952</a><span id="opening">Mon - Sat
                                 8.00/18.00</span>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                             href="javascript:void(0);"><span>Menu mobile</span></a>
                         <div class="main-menu">
                             <div id="header_menu">
-                                <img src="{{ asset('main/img/logo_menu.png') }}" width="145" height="34"
+                                <img src="{{ asset('AET-Travel-Internasional-3-1536x335.png') }}" width="145" height="34"
                                     alt="Bestours">
                             </div>
                             <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
@@ -138,7 +138,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-5 col-sm-12">
-                    <img src="{{ asset('main/img/logo_menu.png') }}" width="145" height="34" alt="Bestours">
+                    <img src="{{ asset('AET-Travel-Internasional-3-1536x335.png') }}" width="145" height="34" alt="Bestours">
                     <p class="mt-3">BesTours adalah agen perjalanan yang melayani perjalanan
                         individu serta grup. Dengan paket liburan terlengkap dan hemat.
                         BesTours menawarkan liburan yang nyaman dan berbeda bagi pelanggannya. </p>
@@ -146,8 +146,8 @@
                 </div>
                 <div class="col-md-4 col-sm-3">
                     <h3>Need help?</h3>
-                    <a href="tel://004542344599" id="phone">+45 423 445 99</a>
-                    <a href="mailto:help@citytours.com" id="email_footer">help@bestours.com</a>
+                    <a href="tel://6282288320952" id="phone">+6282288320952</a>
+                    <a href="mailto:andikarmc94@gmail.com" id="email_footer">andikarmc94@gmail.com</a>
                 </div>
                 <div class="col-md-3 col-sm-3">
                     <h3>About</h3>

@@ -35,8 +35,6 @@
                         </li>
                         <li class="nab-tab-li-2"><a href="#tab_2" data-toggle="tab">Reviews</a>
                         </li>
-                        <li class="nab-tab-li-3"><a href="#tab_3" data-toggle="tab">Map</a>
-                        </li>
                     </ul>
 
                     <div class="tab-content">
@@ -136,7 +134,7 @@
                                                     class="icon-star-empty"></i>
                                             </div>
                                             <div class="rev-info">
-                                                {{ $item->user->name == Auth::user()->name ? 'You' : $item->user->name }} –
+                                                {{ $item->user->name == Auth::user()?->name ? 'You' : $item->user->name }} –
                                                 {{ $item->updated_at->format('d F Y H:i') }}
                                             </div>
                                             <div class="rev-text">
@@ -155,7 +153,7 @@
                             <!-- End review-container -->
 
                             <hr>
-                            @if ($isOrdered && !$reviews->pluck('user.name')->contains(Auth::user()->name))
+                            @if ($isOrdered && !$reviews->pluck('user.name')->contains(Auth::user()->name) && $order->is_accepted)
                                 <div class="add-review">
                                     <h4>Leave a Review</h4>
                                     <form method="post" action="{{ route('order.testimonialUpdate') }}"
@@ -176,39 +174,6 @@
                             @endif
 
                         </div>
-                        <!-- End tab_2 -->
-
-                        <div class="tab-pane fade" id="tab_3">
-                            <div id="map"></div>
-                            <!-- end map-->
-
-                            <div class="box_map">
-                                <i class="icon_set_1_icon-25"></i>
-                                <h4>By Train/tube</h4>
-                                <p>Per cu esse assentior delicatissimi, qui adipiscing dissentiunt mediocritatem in, dicat
-                                    voluptaria no eam. No est alia eloquentiam. Has rebum vulputate adversarium no. Pro cibo
-                                    delenit scripserit id.</p>
-                            </div>
-
-
-                            <div class="box_map">
-                                <i class="icon_set_1_icon-26"></i>
-                                <h4>By bus</h4>
-                                <p>Per cu esse assentior delicatissimi, qui adipiscing dissentiunt mediocritatem in, dicat
-                                    voluptaria no eam. No est alia eloquentiam. Has rebum vulputate adversarium no. Pro cibo
-                                    delenit scripserit id.</p>
-                            </div>
-
-                            <div class="box_map">
-                                <i class="icon_set_1_icon-21"></i>
-                                <h4>By Taxi/cabs</h4>
-                                <p>Per cu esse assentior delicatissimi, qui adipiscing dissentiunt mediocritatem in, dicat
-                                    voluptaria no eam. No est alia eloquentiam. Has rebum vulputate adversarium no. Pro cibo
-                                    delenit scripserit id.</p>
-                            </div>
-
-                        </div>
-                        <!-- End tab_3 -->
                     </div>
                     <!-- End tabs -->
                 </div>

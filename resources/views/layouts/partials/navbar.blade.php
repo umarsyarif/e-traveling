@@ -1,12 +1,12 @@
 <nav class="navbar header-navbar pcoded-header">
     <div class="navbar-wrapper">
 
-        <div class="navbar-logo">
+        <div class="navbar-logo" logo-theme="theme1">
             <a class="mobile-menu" id="mobile-collapse" href="#!">
                 <i class="feather icon-menu"></i>
             </a>
-            <a href="index-1.htm">
-                <img class="img-fluid" src="{{ asset('adminty\assets\images\logo.png') }}" alt="Theme-Logo">
+            <a href="{{ route('home') }}">
+                <img width="150" class="img-fluid" src="{{ asset('AET-Travel-Internasional-3-1536x335.png') }}" alt="Theme-Logo">
             </a>
             <a class="mobile-options">
                 <i class="feather icon-more-horizontal"></i>

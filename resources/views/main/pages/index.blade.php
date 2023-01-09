@@ -181,10 +181,10 @@
 
 			</div>
 			<!-- End row --> --}}
-            @if ($travelCount > 0)
+            @if ($travelAvailable > 0)
                 <p class="text-center add_bottom_45">
                     <a href="{{ route('travel.list') }}"><button class="btn_1">Lihat semua
-                            ({{ $travelCount }})</button></a>
+                            ({{ $travelAvailable }})</button></a>
                 </p>
             @endif
 

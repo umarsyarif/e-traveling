@@ -31,10 +31,12 @@ class HomeController extends Controller
         $travels = Travel::where('start_date', '>', today())->limit(6)->get();
         $reviews = Order::select('user_id', 'testimoni')->whereNotNull('testimoni')->with('user')->get();
         $travelCount = Travel::count();
+        $travelAvailable = Travel::where('start_date', '>', today())->count();
 
         $data = [
             'travels' => $travels,
             'travelCount' => $travelCount,
+            'travelAvailable' => $travelAvailable,
             'reviews' => $reviews
         ];
         return view('main.pages.index', $data);

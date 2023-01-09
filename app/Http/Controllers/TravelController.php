@@ -140,6 +140,7 @@ class TravelController extends Controller
             'isOrdered' => $isOrdered,
             'order' => $order
         ];
+        // return  $data;
 
         return view('main.pages.travel-details', $data);
     }
